@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Customer>
+
+<h1>@ViewBag.Title</h1>
+
+<div class="text-center">
+    <a asp-controller="customer" asp-action="create" class="btn btn-info btn-rounded mb-4">
+        Add New Customer
+    </a>
+</div>
+
+<div class="card-columns">
+    @foreach (var customer in Model)
+    {
+        <div class="card" style="width:auto;">
+            <img src="@Url.Content(customer.Picture)" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@customer.Name</h5>
+                <p class="card-text">@customer.Email</p>
+                <a href="/Customer/Details/@customer.Id" class="btn btn-secondary">Details</a>
+            </div>
+        </div>
+    }
+</div>
+
+@*<h3>All Customers</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>
+                    @customer.Name
+                </td>
+                <td>
+                    @customer.Email
+                </td>
+                <td>
+                    <a href="/Customer/Details/@customer.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>*@
+
+
+@*<div>Customers</div>
+<div>
+    <ul>
+        @foreach (var customer in ViewBag.Customers)
+        {
+            <li>@customer.Name, @customer.PhoneNumber <a href="/Customer/Details/@customer.Id">Details</a></li>
+        }
+    </ul>
+</div>*@
+
+

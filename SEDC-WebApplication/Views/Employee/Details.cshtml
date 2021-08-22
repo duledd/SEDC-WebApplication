@@ -1,0 +1,22 @@
+﻿@model EmployeeDetailsViewModel
+
+<h1>@Model.PageTitle</h1>
+
+<div class="card" style="width: 18rem;">
+    <img src="@Model.EmployeeImage" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h3 class="card-title">@Model.EmployeeName</h3>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">@Model.EmployeePol</li>
+    </ul>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">@Model.EmployeeEmail</li>
+    </ul>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">@Model.RoleEmployee</li>
+    </ul>
+    <div class="card-body">
+        <a href="#" class="btn btn-secondary">Edit Employee</a>
+    </div>
+</div>
