@@ -13,6 +13,10 @@ namespace SEDC_WebApplication.Models
 
         [Required(ErrorMessage = "Required field!")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Required")]
+        [StringLength(50, ErrorMessage = "Max 50 characters")]
+        [RegularExpression(@"\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b")]
         public string Email { get; set; }
         public RoleEnum Role { get; set; }
         public string Pol { get; set; }
