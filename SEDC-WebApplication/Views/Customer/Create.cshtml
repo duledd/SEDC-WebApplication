@@ -1,19 +1,37 @@
-﻿@model Customer
+﻿@model CustomerCreateViewModel
 @{
     ViewBag.Title = "Add New Customer";
 }
 
-<form asp-controller="customer" method="post">
+<form enctype="multipart/form-data" asp-controller="customer" method="post" style="max-width: 600px">
     <div class="md-form mb-5">
-        <input asp-for="Name" type="text" id="form34" class="form-control validate">
+        <input asp-for="Name" type="text" class="form-control validate">
         <span asp-validation-for="Name" class="text-danger"></span>
-        <label asp-for="Name" data-error="wrong" data-success="right" for="form34">Customer name</label>
+        <label asp-for="Name">Customer name</label>
     </div>
 
     <div class="md-form">
-        <input asp-for="Email" type="email" id="form8" class="md-textarea form-control" rows="4">
-        <label asp-for="Email" data-error="wrong" data-success="right" for="form8">Email</label>
+        <input asp-for="Email" class="md-textarea form-control" rows="4">
+        <label asp-for="Email">Email</label>
+    </div>
+
+    <div class="custom-file">
+        <input asp-for="Picture" class="form-control custom-file-input">
+        <span asp-validation-for="Picture"></span>
+        <label asp-for="Picture" class="custom-file-label">Customer Image</label>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    @*@section Scripts{
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+        </script>
+    }*@
 </form>

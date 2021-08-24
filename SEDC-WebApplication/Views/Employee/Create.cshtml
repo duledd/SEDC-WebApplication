@@ -1,34 +1,52 @@
-﻿@model Employee
+﻿@model EmployeeCreateViewModel
 @{
     ViewBag.Title = "Add New Employee";
 }
 
-<form asp-controller="employee" method="post">
+<form enctype="multipart/form-data" asp-controller="employee" method="post" style="max-width: 600px">
     <div class="md-form mb-5">
-        <input asp-for="Name" type="text" id="form34" class="form-control validate">
+        <input asp-for="Name" type="text" class="form-control validate">
         <span asp-validation-for="Name" class="text-danger"></span>
-        <label asp-for="Name" data-error="wrong" data-success="right" for="form34">Product name</label>
+        <label asp-for="Name">Employee name</label>
     </div>
 
     <div class="md-form">
-        <input asp-for="Pol" type="text" id="form8" class="md-textarea form-control" rows="4">
-        <label asp-for="Pol" data-error="wrong" data-success="right" for="form8">Gender</label>
+        <input asp-for="Pol" type="text" class="md-textarea form-control" rows="4">
+        <label asp-for="Pol">Gender</label>
     </div>
 
     <div class="md-form mb-5">
-        <select asp-for="Role" type="text" id="form32" class="form-control validate" asp-items="Html.GetEnumSelectList<RoleEnum>()"></select>
-        <label asp-for="Role" data-error="wrong" data-success="right" for="form32">Role</label>
+        <select asp-for="Role" type="text" class="form-control validate" asp-items="Html.GetEnumSelectList<RoleEnum>()"></select>
+        <label asp-for="Role">Role</label>
     </div>
 
     <div class="md-form mb-5">
-        <input asp-for="Email" type="text" id="form32" class="form-control validate">
-        <label asp-for="Email" data-error="wrong" data-success="right" for="form32">Email</label>
+        <input asp-for="Email" class="form-control validate">
+        <label asp-for="Email">Email</label>
     </div>
 
-    <div class="md-form mb-5">
+    @*<div class="md-form mb-5">
         <input asp-for="DateOfBirth" type="text" id="form32" class="form-control validate">
         <label asp-for="DateOfBirth" data-error="wrong" data-success="right" for="form32">Date of birth</label>
+    </div>*@
+
+    <div class="custom-file">
+        <input asp-for="Photo" class="form-control custom-file-input">
+        <span asp-validation-for="Photo"></span>
+        <label asp-for="Photo" class="custom-file-label">Customer Image</label>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    @*@section Scripts{
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+        </script>
+    }*@
 </form>

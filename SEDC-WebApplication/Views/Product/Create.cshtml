@@ -1,34 +1,52 @@
-﻿@model Product
+﻿@model ProductCreateViewModel
 @{
     ViewBag.Title = "Add New Product";
 }
 
-<form asp-controller="product" method="post">
+<form enctype="multipart/form-data" asp-controller="product" method="post" style="max-width: 600px">
     <div class="md-form mb-5">
-        <input asp-for="ProductName" type="text" id="form34" class="form-control validate">
+        <input asp-for="ProductName" type="text" class="form-control validate">
         <span asp-validation-for="ProductName" class="text-danger"></span>
-        <label asp-for="ProductName" data-error="wrong" data-success="right" for="form34">Product name</label>
+        <label asp-for="ProductName">Product name</label>
     </div>
 
     <div class="md-form">
-        <textarea asp-for="Description" type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
-        <label asp-for="Description" data-error="wrong" data-success="right" for="form8">Description</label>
+        <textarea asp-for="Description" type="text" class="md-textarea form-control" rows="4"></textarea>
+        <label asp-for="Description">Description</label>
     </div>
 
     <div class="md-form mb-5">
-        <input asp-for="UnitPrice" type="text" id="form32" class="form-control validate">
-        <label asp-for="UnitPrice" data-error="wrong" data-success="right" for="form32">Unit Price</label>
+        <input asp-for="UnitPrice" type="text" class="form-control validate">
+        <label asp-for="UnitPrice">Unit Price</label>
     </div>
 
     <div class="md-form mb-5">
-        <input asp-for="IsDiscounted" type="text" id="form32" class="form-control validate">
-        <label data-error="wrong" data-success="right" for="form32">Is Discounted</label>
+        <input asp-for="IsDiscounted" type="text" class="form-control validate">
+        <label asp-for="IsDiscounted">Is Discounted</label>
     </div>
 
     <div class="md-form mb-5">
-        <input asp-for="IsActive" type="text" id="form32" class="form-control validate">
-        <label data-error="wrong" data-success="right" for="form32">Is Active</label>
+        <input asp-for="IsActive" type="text" class="form-control validate">
+        <label asp-for="IsActive">Is Active</label>
+    </div>
+
+    <div class="custom-file">            
+        <input asp-for="PicturePath" class="form-control custom-file-input">
+        <span asp-validation-for="PicturePath"></span>
+        <label asp-for="PicturePath" class="custom-file-label">Product Image</label>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
+    <div asp-validation-summary="All" class="text-danger"></div>
 </form>
+
+@*@section  Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
+ }*@

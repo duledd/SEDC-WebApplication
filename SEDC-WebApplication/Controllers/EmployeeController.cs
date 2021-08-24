@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using SEDC_WebApplication.Models;
 using SEDC_WebApplication.Models.Enum;
 using SEDC_WebApplication.Models.Repositories.Interfaces;
 using SEDC_WebApplication.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,12 +16,14 @@ namespace SEDC_WebApplication.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
         //private List<Employee> employees;
 
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        public EmployeeController(IEmployeeRepository employeeRepository, IHostingEnvironment hostingEnvironment)
         {
             _employeeRepository = employeeRepository;
+            _hostingEnvironment = hostingEnvironment;
             //MockEmployeeRepository mockEmployeeRepository = new MockEmployeeRepository();
             //employees = mockEmployeeRepository.GetAllEmployees().ToList();
 
@@ -69,10 +73,30 @@ namespace SEDC_WebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(EmployeeCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
+                string uniqueFileName = "avatar.png";
+                if (model.Photo != null)
+                {
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "img");
+
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+
+
+                Employee employee = new Employee
+                {
+                    Name = model.Name,
+                    Pol = model.Pol,
+                    Email = model.Email,
+                    Role = model.Role,
+                    //DateOfBirth = model.DateOfBirth,
+                    Picture = "~/img/" + uniqueFileName
+                };
                 Employee newEmployee = _employeeRepository.Add(employee);
                 return RedirectToAction("List");
             }

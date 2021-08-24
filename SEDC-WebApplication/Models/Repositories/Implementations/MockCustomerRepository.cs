@@ -19,21 +19,21 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
                     Id = 1,
                     Name = "Slavko",
                     Email = "dfsd@jhjg",
-                    Picture = "~/img/photo2.jpg",
+                    PicturePath = "~/img/photo2.jpg",
                 },
                 new Customer
                 {
                     Id = 2,
                     Name = "Mirko",
                     Email = "dsfd@hgj",
-                    Picture = "~/img/photo2.jpg",
+                    PicturePath = "~/img/photo2.jpg",
                 },
                 new Customer
                 {
                     Id = 3,
                     Name = "Petko",
                     Email = "dfdsf@fgfdgfd",
-                    Picture = "~/img/photo2.jpg",
+                    PicturePath = "~/img/photo2.jpg",
                 }
             };
         }

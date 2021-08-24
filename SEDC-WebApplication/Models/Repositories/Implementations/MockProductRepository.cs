@@ -21,7 +21,7 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
                     IsDiscounted = true,
                     IsActive = true,
                     IsDeleted = false,
-                    Picture = "~/img/pizza1.jpg",
+                    PicturePath = "~/img/pizza1.jpg",
                     Description = "Some quick example text to build on the card title and make up the bulk of the card's content."
                 },
 
@@ -33,7 +33,7 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
                     IsDiscounted = false,
                     IsActive = true,
                     IsDeleted = false,
-                    Picture = "~/img/pizza3.jpg",
+                    PicturePath = "~/img/pizza3.jpg",
                     Description = "Some quick example text to build on the card title and make up the bulk of the card's content."
                 },
 
@@ -45,7 +45,7 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
                     IsDiscounted = true,
                     IsActive = true,
                     IsDeleted = false,
-                    Picture = "~/img/pizza2.jpg",
+                    PicturePath = "~/img/pizza2.jpg",
                     Description = "Some quick example text to build on the card title and make up the bulk of the card's content."
                 },
             };
@@ -66,12 +66,13 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
             return _productList.Where(x => x.Id ==product.Id).FirstOrDefault();
         }
 
-        public Product Edit(Product product, int id)
+        public Product Edit(Product updatedProductd)
         {
-            _productList.Where(x => x.Id == product.Id).FirstOrDefault();
-            _productList.Remove(product);
-            _productList.Add(product);
-            return _productList.Where(x => x.Id == id).FirstOrDefault();
+            
+            return _productList.Where(x => x.Id == updatedProductd.Id).FirstOrDefault();
+            //_productList.Remove(product);
+            //_productList.Add(product);
+            //return _productList.Where(x => x.Id == id).FirstOrDefault();
         }
     }
 }
