@@ -9,14 +9,17 @@ namespace SEDC_WebApplication.ViewModels
 {
     public class ProductEditViewModel
     {
+        public int ProductId { get; set; }
+
+
         [Required(ErrorMessage = "Required field!")]
-        public string ProductName { get; set; }
-        public decimal UnitPrice { get; set; }
-        public bool IsDiscounted { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsDeleted { get; set; }
-        public string Size { get; set; }
-        public string Description { get; set; }
-        //public IFormFile Picture { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public bool Discounted { get; set; }
+        public bool Active { get; set; }
+        public bool Deleted { get; set; }
+        public string ProductSize { get; set; }
+        public string ProductDescription { get; set; }
+        public IFormFile Picture { get; set; }
     }
 }

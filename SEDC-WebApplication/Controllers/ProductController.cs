@@ -94,37 +94,64 @@ namespace SEDC_WebApplication.Controllers
             }
         }
 
+
+
         [HttpGet]
         [Route("Edit")]
-        public IActionResult Edit( int id)
+        public IActionResult Edit(int id)
         {
-            var edit = _productRepository.GetProductById(id);
-            return View(edit);
-        }
-        [HttpPost]
-        [Route("Edit/{id}")]
-        public IActionResult Edit(Product updatedProduct, int id)
-        {
-            if (ModelState.IsValid)
+            Product product = _productRepository.GetProductById(id);
+            ProductEditViewModel productEditViewModel = new ProductEditViewModel
             {
-                Product product = _productRepository.GetProductById(id);
-                if (product != null)
-                {
-                    product.ProductName = updatedProduct.ProductName;
-                    product.UnitPrice = updatedProduct.UnitPrice;
-                    product.Description = updatedProduct.Description;
-                    product.IsActive = updatedProduct.IsActive;
-                    product.IsDeleted = updatedProduct.IsDeleted;
-                    product.IsDiscounted = updatedProduct.IsDiscounted;
-                    product.Size = updatedProduct.Size;
-                }
-                Product savedProduct = _productRepository.Edit(updatedProduct);
-                return RedirectToAction("List");
-            }
-            else
-            {
-                return View();
-            }
+                ProductId = product.Id,
+                Name = product.ProductName,
+                Price = product.UnitPrice,
+                ProductDescription = product.Description
+            };
+            return View(productEditViewModel);
         }
+
+        //[HttpPost]
+        //[Route("Edit/{id}")]
+        //public IActionResult Edit(ProductEditViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        Product product = _productRepository.GetProductById(model.ProductId);
+        //        product.ProductName = model.Name;
+        //        product.Description = model.ProductDescription;
+        //        product.UnitPrice = model.Price;
+        //        product.IsActive = model.Active;
+        //        product.IsDeleted = model.Deleted;
+        //        product.IsDiscounted = model.Discounted;
+
+        //        string uniqueFileName = "defaultPizza.png";
+        //        if (model.Picture != null)
+        //        {
+        //            string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "img");
+
+        //            uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Picture.FileName;
+        //            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+        //            model.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
+        //        }
+        //        Product productUp = new Product
+        //        {
+        //            ProductName = model.Name,
+        //            UnitPrice = model.Price,
+        //            IsDiscounted = model.Discounted,
+        //            IsActive = model.Active,
+        //            IsDeleted = model.Deleted,
+        //            Size = model.ProductSize,
+        //            Description = model.ProductDescription,
+        //            PicturePath = "~/img/" + uniqueFileName
+        //        };
+        //        Product newProduct = _productRepository.Add(productUp);
+        //        return RedirectToAction("List");
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
