@@ -65,7 +65,7 @@ namespace SEDC_WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = "photo2.png";
+                string uniqueFileName = "photo2.jpg";
                 if (model.Picture != null)
                 {
                     string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "img");
