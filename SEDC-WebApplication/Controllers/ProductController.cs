@@ -94,8 +94,6 @@ namespace SEDC_WebApplication.Controllers
             }
         }
 
-
-
         [HttpGet]
         [Route("Edit/{id}")]
         public IActionResult Edit(int id)
@@ -134,18 +132,9 @@ namespace SEDC_WebApplication.Controllers
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     model.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
-                Product productUp = new Product
-                {
-                    ProductName = model.Name,
-                    UnitPrice = model.Price,
-                    IsDiscounted = model.Discounted,
-                    IsActive = model.Active,
-                    IsDeleted = model.Deleted,
-                    Size = model.ProductSize,
-                    Description = model.ProductDescription,
-                    PicturePath = "~/img/" + uniqueFileName
-                };
-                Product newProduct = _productRepository.Edit(productUp);
+                product.PicturePath = "~/img/" + uniqueFileName;
+                
+                Product newProduct = _productRepository.Edit(product);
                 return RedirectToAction("List");
             }
             else
