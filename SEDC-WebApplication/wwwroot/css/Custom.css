@@ -1,9 +1,26 @@
 ﻿body {
-    background-color: #effade;
-}
-.card-columns {
-    background-color: #dcf7ee;
+    background-color: whitesmoke;
 }
 .card {
-    background-color:azure;
+    margin: auto;
+    background-color: lightgray;
+    display: flex;
 }
+.card li {
+    background-color: #ffffff;
+}
+
+form {
+    max-width: 600px;
+    margin:auto;
+}
+
+.col-md-4 img {
+    padding-top: 67px;
+    border-radius: 10px;
+}
+
+.btn-info {
+    margin-top: 20px;
+}
+

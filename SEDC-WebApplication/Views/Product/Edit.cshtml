@@ -4,9 +4,7 @@
 }
 
 <form enctype="multipart/form-data" asp-controller="product" asp-action="edit" method="post">
-    @*<div class="col-md-4">
-        <img src="@Model.Picture" class="card-img" alt="...">
-    </div>*@
+    <input hidden asp-for="Picture" />
     <input hidden asp-for="ProductId" />
     <div class="md-form mb-5">
         <input asp-for="Name" type="text" class="form-control validate">
@@ -25,7 +23,7 @@
         <label asp-for="ProductDescription">Description</label>
     </div>
 
-    @*<div class="md-form mb-5">
+    <div class="md-form mb-5">
         <input asp-for="Discounted" type="text" class="form-control validate">
         <label>Is Discounted</label>
     </div>
@@ -33,7 +31,13 @@
     <div class="md-form mb-5">
         <input asp-for="Active" type="text" class="form-control validate">
         <label>Is Active</label>
-    </div>*@
+    </div>
 
-    <button asp-controller="product" asp-action="list" type="submit" class="btn btn-primary">Update</button>
+    <div class="custom-file">
+        <input asp-for="Picture" class="form-control custom-file-input">
+        <span asp-validation-for="Picture"></span>
+        <label asp-for="Picture" class="custom-file-label">Change Photo</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
 </form>

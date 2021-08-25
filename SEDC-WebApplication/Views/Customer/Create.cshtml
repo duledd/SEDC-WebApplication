@@ -3,7 +3,7 @@
     ViewBag.Title = "Add New Customer";
 }
 
-<form enctype="multipart/form-data" asp-controller="customer" method="post" style="max-width: 600px">
+<form enctype="multipart/form-data" asp-controller="customer" method="post">
     <div class="md-form mb-5">
         <input asp-for="Name" type="text" class="form-control validate">
         <span asp-validation-for="Name" class="text-danger"></span>
@@ -21,7 +21,7 @@
         <label asp-for="Picture" class="custom-file-label">Customer Image</label>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-info">Submit</button>
     <div asp-validation-summary="All" class="text-danger"></div>
 
     @*@section Scripts{

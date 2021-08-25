@@ -66,13 +66,12 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
             return _productList.Where(x => x.Id ==product.Id).FirstOrDefault();
         }
 
-        //public Product Edit(int id)
-        //{
-        //    Product product = _productRepository.GetProductById(id);
-        //    return product;
-        //    //_productList.Remove(product);
-        //    //_productList.Add(product);
-        //    //return _productList.Where(x => x.Id == id).FirstOrDefault();
-        //}
+        public Product Edit(Product product)
+        {
+            _productList.Where(x => x.Id == product.Id).FirstOrDefault();
+            _productList.Remove(product);
+            _productList.Add(product);
+            return _productList.Where(x => x.Id == product.Id).FirstOrDefault();
+        }
     }
 }
