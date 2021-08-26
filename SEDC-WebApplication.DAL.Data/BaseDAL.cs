@@ -43,7 +43,7 @@ namespace SEDC_WebApplication.DAL.Data
 
         private string GetAppSettingsFileName()
         {
-            var appsetings = $"appsetings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json";
+            var appsetings = $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json";
             return appsetings;
         }
 

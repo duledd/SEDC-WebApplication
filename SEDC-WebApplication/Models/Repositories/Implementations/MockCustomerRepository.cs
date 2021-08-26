@@ -38,8 +38,6 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
             };
         }
 
-        
-
         public IEnumerable<Customer> GetAllCustomers()
         {
             return _customerList;
@@ -55,5 +53,13 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
             _customerList.Add(customer);
             return _customerList.Where(x => x.Id == customer.Id).FirstOrDefault();
         }
+        public Customer Update(Customer customer)
+        {
+            _customerList.Where(x => x.Id == customer.Id).FirstOrDefault();
+            _customerList.Remove(customer);
+            _customerList.Add(customer);
+            return _customerList.Where(x => x.Id == customer.Id).FirstOrDefault();
+        }
+
     }
 }

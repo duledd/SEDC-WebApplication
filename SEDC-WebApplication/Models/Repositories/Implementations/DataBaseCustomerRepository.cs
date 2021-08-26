@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SEDC_WebApplication.Models.Repositories.Implementations
 {
-    public class DataBaseCustomerRepository : ICustomerRepository
+    public class DataBaseCustomerRepository /*: ICustomerRepository*/
     {
         public IEnumerable<Customer> GetAllCustomers()
         {
@@ -19,6 +19,11 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
         }
 
         public Customer Add(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer Update(Customer customer)
         {
             throw new NotImplementedException();
         }

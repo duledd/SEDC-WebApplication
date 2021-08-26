@@ -12,9 +12,9 @@ namespace SEDC_WebApplication.DAL.Data.Entities
             : base (id)
         {
         }
-        public string Name { get; set; }
+        public string CustomerName { get; set; }
 
-        public string Email { get; set; }
+        public int ContactId { get; set; }
         public string PicturePath { get; set; }
     }
 }

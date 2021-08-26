@@ -91,5 +91,49 @@ namespace SEDC_WebApplication.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        [Route("Edit/{id}")]
+        public IActionResult Edit(int id)
+        {
+            Customer customer = _customerRepository.GetCustomerById(id);
+            CustomerEditViewModel customerEditViewModel = new CustomerEditViewModel
+            {
+                CustomerId = customer.Id,
+                CustomerName = customer.Name,
+                CustomerEmail = customer.Email
+            };
+            return View(customerEditViewModel);
+        }
+
+        [HttpPost]
+        [Route("Edit/{id}")]
+        public IActionResult Edit(int id, CustomerEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Customer customer = _customerRepository.GetCustomerById(id);
+                customer.Name = model.CustomerName;
+                customer.Email = model.CustomerEmail;
+
+                string uniqueFileName = "photo2.jpg";
+                if (model.CustomerImage != null)
+                {
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "img");
+
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.CustomerImage.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    model.CustomerImage.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+                customer.PicturePath = "~/img/" + uniqueFileName;
+
+                Customer newProduct = _customerRepository.Update(customer);
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return View();
+            }
+        }
     }
 }

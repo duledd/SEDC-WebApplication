@@ -1,6 +1,6 @@
 ﻿@model CustomerDetailsViewModel
 
-<h2>@Model.PageTitle</h2>
+<h1>@Model.PageTitle</h1>
 
 <div class="card" style="width: 18rem;">
     <img src="@Url.Content(Model.CustomerImage)" class="card-img-top" alt="...">
@@ -11,6 +11,6 @@
         <li class="list-group-item">@Model.CustomerEmail</li>
     </ul>
     <div class="card-body">
-        <a href="#" class="btn btn-secondary">Edit Customer</a>
+        <a asp-controller="customer" asp-action="edit" asp-route-id="@Model.CustomerId" class="btn btn-secondary">Edit Customer</a>
     </div>
 </div>

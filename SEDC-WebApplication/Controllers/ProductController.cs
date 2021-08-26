@@ -123,7 +123,7 @@ namespace SEDC_WebApplication.Controllers
                 product.IsDeleted = model.Deleted;
                 product.IsDiscounted = model.Discounted;
 
-                string uniqueFileName = "defaultPizza.png";
+                string uniqueFileName = "defaultPizza.jpg";
                 if (model.Picture != null)
                 {
                     string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "img");
