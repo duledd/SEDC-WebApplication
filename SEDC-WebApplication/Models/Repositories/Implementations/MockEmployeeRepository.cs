@@ -1,4 +1,5 @@
-﻿using SEDC_WebApplication.Models.Enum;
+﻿using SEDC_WebApplication.BLL.Logic.Models;
+using SEDC_WebApplication.BLL.Logic.Models.Enum;
 using SEDC_WebApplication.Models.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,12 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
 {
     public class MockEmployeeRepository : IEmployeeRepository
     {
-        private List<Employee> _employeeList;
+        private List<EmployeeDTO> _employeeList;
         public MockEmployeeRepository()
         {
-            _employeeList = new List<Employee>
+            _employeeList = new List<EmployeeDTO>
             {
-                new Employee
+                new EmployeeDTO
                 {
                     Id=1,
                     Name="Pera",
@@ -23,7 +24,7 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
                     Pol = "M",
                     Picture = "~/img/avatar.png"
                 },
-                new Employee
+                new EmployeeDTO
                 {
                     Id=2,
                     Name="Mika",
@@ -32,7 +33,7 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
                     Pol = "M",
                     Picture = "~/img/avatar.png"
                 },
-                new Employee
+                new EmployeeDTO
                 {
                     Id=3,
                     Name="Laza",
@@ -45,16 +46,16 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
         }
 
 
-        public IEnumerable<Employee> GetAllEmployees()
+        public IEnumerable<EmployeeDTO> GetAllEmployees()
         {
             return _employeeList;
         }
 
-        public Employee GetEmployeeById(int id)
+        public EmployeeDTO GetEmployeeById(int id)
         {
             return _employeeList.Where(x => x.Id == id).FirstOrDefault();
         }
-        public Employee Add(Employee employee)
+        public EmployeeDTO Add(EmployeeDTO employee)
         {
             employee.Id = _employeeList.Max(p => p.Id) + 1;
             _employeeList.Add(employee);

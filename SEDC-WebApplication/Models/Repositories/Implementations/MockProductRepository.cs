@@ -66,7 +66,7 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
             return _productList.Where(x => x.Id ==product.Id).FirstOrDefault();
         }
 
-        public Product Edit(Product product)
+        public Product Update(Product product)
         {
             _productList.Where(x => x.Id == product.Id).FirstOrDefault();
             _productList.Remove(product);

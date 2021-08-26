@@ -1,13 +1,13 @@
-﻿using SEDC_WebApplication.Models.Enum;
+﻿using SEDC_WebApplication.BLL.Logic.Models.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SEDC_WebApplication.Models
+namespace SEDC_WebApplication.BLL.Logic.Models
 {
-    public class Employee
+    public class EmployeeDTO
     {
         public int Id { get; set; }
 
@@ -20,7 +20,7 @@ namespace SEDC_WebApplication.Models
         public string Email { get; set; }
         public RoleEnum Role { get; set; }
         public string Pol { get; set; }
-        //public DateTime DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public string Picture { get; set; }
     }
 }

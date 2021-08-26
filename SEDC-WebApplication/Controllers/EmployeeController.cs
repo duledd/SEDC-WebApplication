@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using SEDC_WebApplication.BLL.Logic.Models;
 using SEDC_WebApplication.Models;
-using SEDC_WebApplication.Models.Enum;
 using SEDC_WebApplication.Models.Repositories.Interfaces;
 using SEDC_WebApplication.ViewModels;
 using System;
@@ -34,7 +34,7 @@ namespace SEDC_WebApplication.Controllers
         public IActionResult List()
         {
 
-            List<Employee> employees = _employeeRepository.GetAllEmployees().ToList();
+            List<EmployeeDTO> employees = _employeeRepository.GetAllEmployees().ToList();
             ViewBag.Title = "Employees";
 
             return View(employees);
@@ -47,7 +47,7 @@ namespace SEDC_WebApplication.Controllers
             //Employee employee =  mockEmployeeRepository.GetEmployeeById(id);
             //Employee employee = employees.Where(x => x.Id == id).FirstOrDefault();
 
-            Employee employee = _employeeRepository.GetEmployeeById(id);
+            EmployeeDTO employee = _employeeRepository.GetEmployeeById(id);
 
             //EmployeeDetailsViewModel employeeVM = new EmployeeDetailsViewModel
             //{
@@ -88,7 +88,7 @@ namespace SEDC_WebApplication.Controllers
                 }
 
 
-                Employee employee = new Employee
+                EmployeeDTO employee = new EmployeeDTO
                 {
                     Name = model.Name,
                     Pol = model.Pol,
@@ -97,7 +97,7 @@ namespace SEDC_WebApplication.Controllers
                     //DateOfBirth = model.DateOfBirth,
                     Picture = "~/img/" + uniqueFileName
                 };
-                Employee newEmployee = _employeeRepository.Add(employee);
+                EmployeeDTO newEmployee = _employeeRepository.Add(employee);
                 return RedirectToAction("List");
             }
             else

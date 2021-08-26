@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using SEDC_WebApplication.Models.Enum;
+using SEDC_WebApplication.BLL.Logic.Models.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

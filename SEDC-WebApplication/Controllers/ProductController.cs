@@ -134,7 +134,7 @@ namespace SEDC_WebApplication.Controllers
                 }
                 product.PicturePath = "~/img/" + uniqueFileName;
                 
-                Product newProduct = _productRepository.Edit(product);
+                Product newProduct = _productRepository.Update(product);
                 return RedirectToAction("List");
             }
             else

@@ -4,12 +4,16 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SEDC_WebApplication.BLL.Logic.Interfaces;
+using SEDC_WebApplication.BLL.Logic.Implementations;
 using SEDC_WebApplication.Models.Repositories.Implementations;
 using SEDC_WebApplication.Models.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SEDC_WebApplication.DAL.Data.Interfaces;
+using SEDC_WebApplication.DAL.Data.Implementations;
 
 namespace SEDC_WebApplication
 {
@@ -27,11 +31,20 @@ namespace SEDC_WebApplication
         {
             services.AddControllersWithViews();
 
+            services.AddAutoMapper(typeof(EmployeeManager));
+
             services.AddSingleton<ICustomerRepository, MockCustomerRepository>();
 
             services.AddSingleton<IProductRepository, MockProductRepository>();
 
-            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, DataBaseEmployeeRepository>();
+
+            //BLL
+            services.AddScoped<IEmployeeManager, EmployeeManager>();
+
+            //DAL 
+            services.AddScoped<IEmployeeDAL, EmployeeDAL>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

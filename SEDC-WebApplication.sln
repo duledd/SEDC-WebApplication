@@ -5,6 +5,14 @@ VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDC-WebApplication", "SEDC-WebApplication\SEDC-WebApplication.csproj", "{DA06CD8E-76E5-4105-BDD0-474E6B8E0961}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{F06CF601-907F-4131-8224-26701883001C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{4587A954-4DD5-48FD-B224-E9CE68B33E28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDC-WebApplication.BLL.Logic", "SEDC-WebApplication.BLL.Logic\SEDC-WebApplication.BLL.Logic.csproj", "{8D7896BE-D397-4FDE-BD51-416C5D2569F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDC-WebApplication.DAL.Data", "SEDC-WebApplication.DAL.Data\SEDC-WebApplication.DAL.Data.csproj", "{642E23E5-7DF0-4963-8D78-E6743C29A367}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +23,21 @@ Global
 		{DA06CD8E-76E5-4105-BDD0-474E6B8E0961}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA06CD8E-76E5-4105-BDD0-474E6B8E0961}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA06CD8E-76E5-4105-BDD0-474E6B8E0961}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D7896BE-D397-4FDE-BD51-416C5D2569F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D7896BE-D397-4FDE-BD51-416C5D2569F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D7896BE-D397-4FDE-BD51-416C5D2569F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D7896BE-D397-4FDE-BD51-416C5D2569F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{642E23E5-7DF0-4963-8D78-E6743C29A367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{642E23E5-7DF0-4963-8D78-E6743C29A367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{642E23E5-7DF0-4963-8D78-E6743C29A367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{642E23E5-7DF0-4963-8D78-E6743C29A367}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8D7896BE-D397-4FDE-BD51-416C5D2569F7} = {F06CF601-907F-4131-8224-26701883001C}
+		{642E23E5-7DF0-4963-8D78-E6743C29A367} = {4587A954-4DD5-48FD-B224-E9CE68B33E28}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C928B028-D505-4708-8A5A-65A3A5AE698E}
