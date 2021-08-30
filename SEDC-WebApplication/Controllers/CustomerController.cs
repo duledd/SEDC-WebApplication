@@ -33,7 +33,7 @@ namespace SEDC_WebApplication.Controllers
         [Route("List")]
         public IActionResult List()
         {
-            List<Customer> customer = _customerRepository.GetAllCustomers().ToList();
+            List<CustomerDTO> customer = _customerRepository.GetAllCustomers().ToList();
             ViewBag.Title = "Customers";
 
             return View(customer);
@@ -43,7 +43,7 @@ namespace SEDC_WebApplication.Controllers
         [Route("Details/{id}")]
         public IActionResult Details(int id)
         {
-            Customer customer = _customerRepository.GetCustomerById(id);
+            CustomerDTO customer = _customerRepository.GetCustomerById(id);
 
             CustomerDetailsViewModel customerVM = new CustomerDetailsViewModel();
             customerVM.CustomerName = customer.Name;
@@ -76,14 +76,14 @@ namespace SEDC_WebApplication.Controllers
                 }
 
 
-                Customer customer = new Customer
+                CustomerDTO customer = new CustomerDTO
                 {
                     Name = model.Name,
                     Email = model.Email,
                     //DateOfBirth = model.DateOfBirth,
                     PicturePath = "~/img/" + uniqueFileName
                 };
-                Customer newCustomer = _customerRepository.Add(customer);
+                CustomerDTO newCustomer = _customerRepository.Add(customer);
                 return RedirectToAction("List");
             }
             else
@@ -96,7 +96,7 @@ namespace SEDC_WebApplication.Controllers
         [Route("Edit/{id}")]
         public IActionResult Edit(int id)
         {
-            Customer customer = _customerRepository.GetCustomerById(id);
+            CustomerDTO customer = _customerRepository.GetCustomerById(id);
             CustomerEditViewModel customerEditViewModel = new CustomerEditViewModel
             {
                 CustomerId = customer.Id,
@@ -106,34 +106,34 @@ namespace SEDC_WebApplication.Controllers
             return View(customerEditViewModel);
         }
 
-        [HttpPost]
-        [Route("Edit/{id}")]
-        public IActionResult Edit(int id, CustomerEditViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                Customer customer = _customerRepository.GetCustomerById(id);
-                customer.Name = model.CustomerName;
-                customer.Email = model.CustomerEmail;
+        //[HttpPost]
+        //[Route("Edit/{id}")]
+        //public IActionResult Edit(int id, CustomerEditViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        CustomerDTO customer = _customerRepository.GetCustomerById(id);
+        //        customer.Name = model.CustomerName;
+        //        customer.Email = model.CustomerEmail;
 
-                string uniqueFileName = "photo2.jpg";
-                if (model.CustomerImage != null)
-                {
-                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "img");
+        //        string uniqueFileName = "photo2.jpg";
+        //        if (model.CustomerImage != null)
+        //        {
+        //            string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "img");
 
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.CustomerImage.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    model.CustomerImage.CopyTo(new FileStream(filePath, FileMode.Create));
-                }
-                customer.PicturePath = "~/img/" + uniqueFileName;
+        //            uniqueFileName = Guid.NewGuid().ToString() + "_" + model.CustomerImage.FileName;
+        //            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+        //            model.CustomerImage.CopyTo(new FileStream(filePath, FileMode.Create));
+        //        }
+        //        customer.PicturePath = "~/img/" + uniqueFileName;
 
-                Customer newProduct = _customerRepository.Update(customer);
-                return RedirectToAction("List");
-            }
-            else
-            {
-                return View();
-            }
-        }
+        //        CustomerDTO newProduct = _customerRepository.Update(customer);
+        //        return RedirectToAction("List");
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

@@ -9,26 +9,26 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
 {
     public class MockCustomerRepository : ICustomerRepository
     {
-        private List<Customer> _customerList;
+        private List<CustomerDTO> _customerList;
         public MockCustomerRepository()
         {
-            _customerList = new List<Customer>
+            _customerList = new List<CustomerDTO>
             {
-                new Customer
+                new CustomerDTO
                 {
                     Id = 1,
                     Name = "Slavko",
                     Email = "dfsd@jhjg",
                     PicturePath = "~/img/photo2.jpg",
                 },
-                new Customer
+                new CustomerDTO
                 {
                     Id = 2,
                     Name = "Mirko",
                     Email = "dsfd@hgj",
                     PicturePath = "~/img/photo2.jpg",
                 },
-                new Customer
+                new CustomerDTO
                 {
                     Id = 3,
                     Name = "Petko",
@@ -38,22 +38,22 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
             };
         }
 
-        public IEnumerable<Customer> GetAllCustomers()
+        public IEnumerable<CustomerDTO> GetAllCustomers()
         {
             return _customerList;
         }
 
-        public Customer GetCustomerById(int id)
+        public CustomerDTO GetCustomerById(int id)
         {
             return _customerList.Where(x => x.Id == id).FirstOrDefault();
         }
-        public Customer Add(Customer customer)
+        public CustomerDTO Add(CustomerDTO customer)
         {
             customer.Id = _customerList.Max(p => p.Id) + 1;
             _customerList.Add(customer);
             return _customerList.Where(x => x.Id == customer.Id).FirstOrDefault();
         }
-        public Customer Update(Customer customer)
+        public CustomerDTO Update(CustomerDTO customer)
         {
             _customerList.Where(x => x.Id == customer.Id).FirstOrDefault();
             _customerList.Remove(customer);

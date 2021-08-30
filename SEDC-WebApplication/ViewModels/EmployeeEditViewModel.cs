@@ -1,18 +1,20 @@
-﻿using System;
+﻿using SEDC_WebApplication.BLL.Logic.Models.Enum;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SEDC_WebApplication.ViewModels
 {
-    public class EmployeeDetailsViewModel
+    public class EmployeeEditViewModel
     {
-        public string PageTitle { get; set; }
         public int EmployeeId { get; set; }
         public string EmployeeName { get; set; }
         public string EmployeeEmail { get; set; }
-        public string RoleEmployee { get; set; }
+        public RoleEnum EmployeeRole { get; set; }
         public string EmployeePol { get; set; }
-        public string EmployeeImage { get; set; }
+        public DateTime EmployeeDateOfBirth { get; set; }
+        public string EmployeePicture { get; set; }
     }
 }

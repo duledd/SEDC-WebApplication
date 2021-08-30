@@ -35,7 +35,7 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
 
         public IEnumerable<EmployeeDTO> GetAllEmployees()
         {
-            return _mapper.Map<List<EmployeeDTO>>(_employeeDAL.GetAll(0,5));
+            return _mapper.Map<List<EmployeeDTO>>(_employeeDAL.GetAll(0,50));
         }
 
         public EmployeeDTO GetEmployeeById(int id)

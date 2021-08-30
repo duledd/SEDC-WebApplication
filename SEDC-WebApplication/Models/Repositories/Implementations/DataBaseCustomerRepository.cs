@@ -1,4 +1,6 @@
-﻿using SEDC_WebApplication.Models.Repositories.Interfaces;
+﻿using SEDC_WebApplication.BLL.Logic.Interfaces;
+using SEDC_WebApplication.DAL.Data.Entities;
+using SEDC_WebApplication.Models.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,26 +8,31 @@ using System.Threading.Tasks;
 
 namespace SEDC_WebApplication.Models.Repositories.Implementations
 {
-    public class DataBaseCustomerRepository /*: ICustomerRepository*/
+    public class DataBaseCustomerRepository : ICustomerRepository
     {
-        public IEnumerable<Customer> GetAllCustomers()
+        private readonly ICustomerManager _customerManager;
+        public DataBaseCustomerRepository(ICustomerManager customerManager)
         {
-            throw new NotImplementedException();
+            _customerManager = customerManager;
+        }
+        public IEnumerable<CustomerDTO> GetAllCustomers()
+        {
+            return _customerManager.GetAllCustomers();
         }
 
-        public Customer GetCustomerById(int id)
+        public CustomerDTO GetCustomerById(int id)
         {
-            throw new NotImplementedException();
+            return _customerManager.GetCustomerById(id);
         }
 
-        public Customer Add(Customer customer)
+        public CustomerDTO Add(CustomerDTO customer)
         {
-            throw new NotImplementedException();
+            return _customerManager.Add(customer);
         }
 
-        public Customer Update(Customer customer)
+        public CustomerDTO Update(CustomerDTO customer)
         {
-            throw new NotImplementedException();
+            return _customerManager.Add(customer);
         }
     }
 }

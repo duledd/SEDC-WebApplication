@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SEDC_WebApplication.Models
 {
-    public class Customer
+    public class CustomerDTO
     {
         public int Id { get; set; }
 

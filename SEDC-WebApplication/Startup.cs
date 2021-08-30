@@ -32,8 +32,11 @@ namespace SEDC_WebApplication
             services.AddControllersWithViews();
 
             services.AddAutoMapper(typeof(EmployeeManager));
+            services.AddAutoMapper(typeof(CustomerManager));
+            services.AddAutoMapper(typeof(ProductManager));
 
-            services.AddSingleton<ICustomerRepository, MockCustomerRepository>();
+
+            services.AddScoped<ICustomerRepository, DataBaseCustomerRepository>();
 
             services.AddSingleton<IProductRepository, MockProductRepository>();
 
@@ -42,9 +45,16 @@ namespace SEDC_WebApplication
             //BLL
             services.AddScoped<IEmployeeManager, EmployeeManager>();
 
+            services.AddScoped<ICustomerManager, CustomerManager>();
+
+            services.AddScoped<IProductManager, ProductManager>();
+
             //DAL 
             services.AddScoped<IEmployeeDAL, EmployeeDAL>();
 
+            services.AddScoped<ICustomerDAL, CustomerDAL>();
+
+            services.AddScoped<IProductDAL, ProductDAL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

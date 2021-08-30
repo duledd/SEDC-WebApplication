@@ -1,15 +1,16 @@
-﻿using System;
+﻿using SEDC_WebApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace SEDC_WebApplication.Models.Repositories.Interfaces
+namespace SEDC_WebApplication.BLL.Logic.Interfaces
 {
-    public interface ICustomerRepository
+    public interface ICustomerManager
     {
         IEnumerable<CustomerDTO> GetAllCustomers();
         CustomerDTO GetCustomerById(int id);
         CustomerDTO Add(CustomerDTO customer);
-        //CustomerDTO Update(CustomerDTO customer);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using SEDC_WebApplication.BLL.Logic.Models;
 using SEDC_WebApplication.Models;
 using SEDC_WebApplication.Models.Repositories.Interfaces;
 using SEDC_WebApplication.ViewModels;
@@ -30,7 +31,7 @@ namespace SEDC_WebApplication.Controllers
         public IActionResult List()
         {
             //ViewData["Products"] = products;
-            List<Product> products = _productRepository.GetAllProducts().ToList();
+            List<ProductDTO> products = _productRepository.GetAllProducts().ToList();
             ViewBag.Title = "Products";
 
             return View(products);
@@ -39,18 +40,18 @@ namespace SEDC_WebApplication.Controllers
         [Route("Details/{id}")]
         public IActionResult Details(int id)
         {
-            Product product = _productRepository.GetProductById(id);
+            ProductDTO product = _productRepository.GetProductById(id);
 
             ProductDetailsViewModel productVM = new ProductDetailsViewModel();
             productVM.ProductId = product.Id;
             productVM.PageTitle = "Product details";
-            productVM.Name = product.ProductName;
-            productVM.ProductDescription = product.Description;
-            productVM.Price = product.UnitPrice;
-            productVM.Discounted = product.IsDiscounted;
-            productVM.Active = product.IsActive;
-            productVM.Deleted = product.IsDeleted;
-            productVM.ProductImage = product.PicturePath;
+            productVM.Name = product.Name;
+            productVM.ProductDescription = product.ProductDescription;
+            productVM.Price = product.Price;
+            productVM.Discounted = product.Discounted;
+            productVM.Active = product.Active;
+            productVM.Deleted = product.Deleted;
+            productVM.ProductImage = product.ImagePath;
 
             return View(productVM);
         }
@@ -75,18 +76,18 @@ namespace SEDC_WebApplication.Controllers
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     model.PicturePath.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
-                Product product = new Product
+                ProductDTO product = new ProductDTO
                 {
-                    ProductName = model.ProductName,
-                    UnitPrice = model.UnitPrice,
-                    IsDiscounted = model.IsDiscounted,
-                    IsActive = model.IsActive,
-                    IsDeleted = model.IsDeleted,
-                    Size = model.Size,
-                    Description = model.Description,
-                    PicturePath = "~/img/" + uniqueFileName
+                    Name = model.ProductName,
+                    Price = model.UnitPrice,
+                    Discounted = model.IsDiscounted,
+                    Active = model.IsActive,
+                    Deleted = model.IsDeleted,
+                    ProductSize = model.Size,
+                    ProductDescription = model.Description,
+                    ImagePath = "~/img/" + uniqueFileName
                 };
-                Product newProduct = _productRepository.Add(product);
+                ProductDTO newProduct = _productRepository.Add(product);
                 return RedirectToAction("List");
             } else
             {
@@ -98,49 +99,49 @@ namespace SEDC_WebApplication.Controllers
         [Route("Edit/{id}")]
         public IActionResult Edit(int id)
         {
-            Product product = _productRepository.GetProductById(id);
+            ProductDTO product = _productRepository.GetProductById(id);
             ProductEditViewModel productEditViewModel = new ProductEditViewModel
             {
                 ProductId = product.Id,
-                Name = product.ProductName,
-                Price = product.UnitPrice,
-                ProductDescription = product.Description
+                Name = product.Name,
+                Price = product.Price,
+                ProductDescription = product.ProductDescription
             };
             return View(productEditViewModel);
         }
 
-        [HttpPost]
-        [Route("Edit/{id}")]
-        public IActionResult Edit(int id, ProductEditViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                Product product = _productRepository.GetProductById(id);
-                product.ProductName = model.Name;
-                product.Description = model.ProductDescription;
-                product.UnitPrice = model.Price;
-                product.IsActive = model.Active;
-                product.IsDeleted = model.Deleted;
-                product.IsDiscounted = model.Discounted;
+        //[HttpPost]
+        //[Route("Edit/{id}")]
+        //public IActionResult Edit(int id, ProductEditViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        ProductDTO product = _productRepository.GetProductById(id);
+        //        product.Name = model.Name;
+        //        product.ProductDescription = model.ProductDescription;
+        //        product.Price = model.Price;
+        //        product.Active = model.Active;
+        //        product.Deleted = model.Deleted;
+        //        product.Discounted = model.Discounted;
 
-                string uniqueFileName = "defaultPizza.jpg";
-                if (model.Picture != null)
-                {
-                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "img");
+        //        string uniqueFileName = "defaultPizza.jpg";
+        //        if (model.Picture != null)
+        //        {
+        //            string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "img");
 
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Picture.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    model.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
-                }
-                product.PicturePath = "~/img/" + uniqueFileName;
+        //            uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Picture.FileName;
+        //            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+        //            model.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
+        //        }
+        //        product.ImagePath = "~/img/" + uniqueFileName;
                 
-                Product newProduct = _productRepository.Update(product);
-                return RedirectToAction("List");
-            }
-            else
-            {
-                return View();
-            }
-        }
+        //        ProductDTO newProduct = _productRepository.Update(product);
+        //        return RedirectToAction("List");
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

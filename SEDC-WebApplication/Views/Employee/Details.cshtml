@@ -17,6 +17,6 @@
         <li class="list-group-item">@Model.RoleEmployee</li>
     </ul>
     <div class="card-body">
-        <a href="#" class="btn btn-secondary">Edit Employee</a>
+        <a asp-controller="employee" asp-action="edit" asp-route-id="@Model.EmployeeId" class="btn btn-secondary">Edit Employee</a>
     </div>
 </div>

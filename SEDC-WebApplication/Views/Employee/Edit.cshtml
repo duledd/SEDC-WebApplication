@@ -1,0 +1,32 @@
+﻿@model EmployeeEditViewModel
+@{
+    ViewBag.Title = "Edit Employee";
+}
+
+<form enctype="multipart/form-data" asp-controller="product" asp-action="edit" method="post">
+    <input hidden asp-for="EmployeePicture" />
+    <input hidden asp-for="EmployeeId" />
+    <div class="md-form mb-5">
+        <input asp-for="EmployeeName" type="text" class="form-control validate">
+        <span asp-validation-for="EmployeeName" class="text-danger"></span>
+        <label asp-for="EmployeeName">Employee name</label>
+    </div>
+
+    <div class="md-form mb-5">
+        <input asp-for="EmployeeEmail" type="text" class="form-control validate">
+        <label asp-for="EmployeeEmail">Email</label>
+    </div>
+
+    <div class="md-form mb-5">
+        <input asp-for="EmployeePol" type="text" class="form-control validate">
+        <label>Pol</label>
+    </div>
+
+    <div class="custom-file">
+        <input asp-for="EmployeePicture" class="form-control custom-file-input">
+        <span asp-validation-for="EmployeePicture"></span>
+        <label asp-for="EmployeePicture" class="custom-file-label">Change Photo</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

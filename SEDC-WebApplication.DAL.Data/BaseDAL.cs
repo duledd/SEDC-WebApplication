@@ -38,13 +38,14 @@ namespace SEDC_WebApplication.DAL.Data
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile(GetAppSettingsFileName(), optional: true, reloadOnChange: true)
                 .Build();
+
             return configuration.GetConnectionString(DB_CONNECTION_STRING_KEY);
         }
 
         private string GetAppSettingsFileName()
         {
-            var appsetings = $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json";
-            return appsetings;
+            var appsettings = $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json";
+            return appsettings;
         }
 
         protected SqlCommand CommandGet(SqlConnection cn)
