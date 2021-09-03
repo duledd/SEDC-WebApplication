@@ -8,9 +8,8 @@ namespace SEDC_WebApplication.DAL.Data
 {
     internal class ColumnPrefixConstants
     {
-        public const string PRO = "pro";
+        public const string PRO = "prod";
         public const string EMP = "emp";
         public const string CUS = "cus";
-        public const string PROD = "prod";
     }
 }

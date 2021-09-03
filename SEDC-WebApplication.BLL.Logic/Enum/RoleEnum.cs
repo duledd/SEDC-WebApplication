@@ -9,8 +9,8 @@ namespace SEDC_WebApplication.BLL.Logic.Models.Enum
     public enum RoleEnum
     {
         [Display(Name = "Menadzer")]
-        Manager,
-        Sales,
-        Operater
+        Manager = 1,
+        Sales = 2,
+        Operater = 3
     }
 }

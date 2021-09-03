@@ -30,9 +30,9 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
             return _customerManager.Add(customer);
         }
 
-        public CustomerDTO Update(CustomerDTO customer)
-        {
-            return _customerManager.Add(customer);
-        }
+        //public CustomerDTO Update(CustomerDTO customer)
+        //{
+        //    return _customerManager.Add(customer);
+        //}
     }
 }

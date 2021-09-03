@@ -61,6 +61,7 @@ namespace SEDC_WebApplication.Controllers
             employeeVM.PageTitle = "Employee's details";
             employeeVM.RoleEmployee = employee.Role.ToString();
             employeeVM.EmployeePol = employee.Pol;
+            employeeVM.DateOfBirth = employee.DateOfBirth;
             employeeVM.EmployeeImage = employee.Picture;
 
             return View(employeeVM);
@@ -90,15 +91,16 @@ namespace SEDC_WebApplication.Controllers
 
                 EmployeeDTO employee = new EmployeeDTO
                 {
+                    Id = null,
                     Name = model.Name,
                     Pol = model.Pol,
                     Email = model.Email,
                     Role = model.Role,
-                    //DateOfBirth = model.DateOfBirth,
+                    DateOfBirth = model.DateOfBirth,
                     Picture = "~/img/" + uniqueFileName
                 };
                 EmployeeDTO newEmployee = _employeeRepository.Add(employee);
-                return RedirectToAction("List");
+                return RedirectToAction("List", new { id = newEmployee.Id});
             }
             else
             {

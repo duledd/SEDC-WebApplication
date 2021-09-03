@@ -1,4 +1,5 @@
-﻿using SEDC_WebApplication.Models.Repositories.Interfaces;
+﻿using SEDC_WebApplication.BLL.Logic.Models;
+using SEDC_WebApplication.Models.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,70 +9,70 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
 {
     public class MockProductRepository : IProductRepository
     {
-        private List<Product> _productList;
+        private List<ProductDTO> _productList;
         public MockProductRepository()
         {
-            _productList = new List<Product>
+            _productList = new List<ProductDTO>
             {
-                new Product
+                new ProductDTO
                 {
                     Id = 1,
-                    ProductName = "Capricosa",
-                    UnitPrice = 200,
-                    IsDiscounted = true,
-                    IsActive = true,
-                    IsDeleted = false,
-                    PicturePath = "~/img/pizza1.jpg",
-                    Description = "Some quick example text to build on the card title and make up the bulk of the card's content."
+                    Name = "Capricosa",
+                    Price = 200,
+                    Discounted = true,
+                    Active = true,
+                    Deleted = false,
+                    ImagePath = "~/img/pizza1.jpg"
+                    //ProductDescription = "Some quick example text to build on the card title and make up the bulk of the card's content."
                 },
 
-                new Product
+                new ProductDTO
                 {
                     Id = 2,
-                    ProductName = "Vegeteriana",
-                    UnitPrice = 180,
-                    IsDiscounted = false,
-                    IsActive = true,
-                    IsDeleted = false,
-                    PicturePath = "~/img/pizza3.jpg",
-                    Description = "Some quick example text to build on the card title and make up the bulk of the card's content."
+                    Name = "Vegeteriana",
+                    Price = 180,
+                    Discounted = false,
+                    Active = true,
+                    Deleted = false,
+                    ImagePath = "~/img/pizza3.jpg"
+                    //ProductDescription = "Some quick example text to build on the card title and make up the bulk of the card's content."
                 },
 
-                new Product
+                new ProductDTO
                 {
                     Id = 3,
-                    ProductName = "Special",
-                    UnitPrice = 220,
-                    IsDiscounted = true,
-                    IsActive = true,
-                    IsDeleted = false,
-                    PicturePath = "~/img/pizza2.jpg",
-                    Description = "Some quick example text to build on the card title and make up the bulk of the card's content."
+                    Name = "Special",
+                    Price = 220,
+                    Discounted = true,
+                    Active = true,
+                    Deleted = false,
+                    ImagePath = "~/img/pizza2.jpg"
+                    //ProductDescription = "Some quick example text to build on the card title and make up the bulk of the card's content."
                 },
             };
         }
-        public IEnumerable<Product> GetAllProducts()
+        public IEnumerable<ProductDTO> GetAllProducts()
         {
             return _productList;
         }
 
-        public Product GetProductById(int id)
+        public ProductDTO GetProductById(int id)
         {
             return _productList.Where(x => x.Id == id).FirstOrDefault();
         }
-        public Product Add(Product product)
+        public ProductDTO Add(ProductDTO product)
         {
             product.Id = _productList.Max(p => p.Id) + 1;
             _productList.Add(product);
             return _productList.Where(x => x.Id ==product.Id).FirstOrDefault();
         }
 
-        public Product Update(Product product)
-        {
-            _productList.Where(x => x.Id == product.Id).FirstOrDefault();
-            _productList.Remove(product);
-            _productList.Add(product);
-            return _productList.Where(x => x.Id == product.Id).FirstOrDefault();
-        }
+        //public Product Update(Product product)
+        //{
+        //    _productList.Where(x => x.Id == product.Id).FirstOrDefault();
+        //    _productList.Remove(product);
+        //    _productList.Add(product);
+        //    return _productList.Where(x => x.Id == product.Id).FirstOrDefault();
+        //}
     }
 }

@@ -38,7 +38,7 @@ namespace SEDC_WebApplication
 
             services.AddScoped<ICustomerRepository, DataBaseCustomerRepository>();
 
-            services.AddSingleton<IProductRepository, MockProductRepository>();
+            services.AddScoped<IProductRepository, DataBaseProductRepository>();
 
             services.AddScoped<IEmployeeRepository, DataBaseEmployeeRepository>();
 

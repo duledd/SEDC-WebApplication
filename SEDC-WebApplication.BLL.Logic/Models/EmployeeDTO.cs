@@ -9,7 +9,7 @@ namespace SEDC_WebApplication.BLL.Logic.Models
 {
     public class EmployeeDTO
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required(ErrorMessage = "Required field!")]
         public string Name { get; set; }

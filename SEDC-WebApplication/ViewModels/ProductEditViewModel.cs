@@ -19,7 +19,7 @@ namespace SEDC_WebApplication.ViewModels
         public bool Active { get; set; }
         public bool Deleted { get; set; }
         public string ProductSize { get; set; }
-        public string ProductDescription { get; set; }
+        //public string ProductDescription { get; set; }
         public IFormFile Picture { get; set; }
     }
 }

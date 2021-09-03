@@ -78,13 +78,15 @@ namespace SEDC_WebApplication.Controllers
 
                 CustomerDTO customer = new CustomerDTO
                 {
+                    Id = null,
                     Name = model.Name,
                     Email = model.Email,
+                    CustomerContactId = model.ContactId,
                     //DateOfBirth = model.DateOfBirth,
                     PicturePath = "~/img/" + uniqueFileName
                 };
                 CustomerDTO newCustomer = _customerRepository.Add(customer);
-                return RedirectToAction("List");
+                return RedirectToAction("List", new { id = newCustomer.Id });
             }
             else
             {
@@ -99,7 +101,7 @@ namespace SEDC_WebApplication.Controllers
             CustomerDTO customer = _customerRepository.GetCustomerById(id);
             CustomerEditViewModel customerEditViewModel = new CustomerEditViewModel
             {
-                CustomerId = customer.Id,
+                //CustomerId = customer.Id,
                 CustomerName = customer.Name,
                 CustomerEmail = customer.Email
             };

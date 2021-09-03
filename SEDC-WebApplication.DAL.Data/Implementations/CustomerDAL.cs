@@ -171,7 +171,7 @@ namespace SEDC_WebApplication.DAL.Data.Implementations
             }
         }
 
-        public List<Customer> SearchEmployees(string searchParam)
+        public List<Customer> SearchCustomers(string searchParam)
         {
             SqlConnection cn = ConnectionGet();
 
@@ -211,7 +211,8 @@ namespace SEDC_WebApplication.DAL.Data.Implementations
             this.ParamStringNullableValueSet(cmd, item.UserName, "@UserName", SqlDbType.NVarChar, 50);
             this.ParamStringNullableValueSet(cmd, item.Password, "@Password", SqlDbType.NVarChar, 50);
             this.ParamStringNonNullableValueSet(cmd, item.CustomerName, "@CustomerName", SqlDbType.NVarChar, 50);
-            //this.ParamStringNonNullableValueSet(cmd, item.ContactId, "@ContactId", SqlDbType.Int);
+            this.ParamValueTypeNonNullableValueSet(cmd, item.ContactId, "@ContactId", SqlDbType.Int);
+            this.ParamStringNonNullableValueSet(cmd, item.PicturePath, "@PicturePath", SqlDbType.VarChar);
         }
 
         private Customer Create(IDataReader reader)
@@ -219,8 +220,8 @@ namespace SEDC_WebApplication.DAL.Data.Implementations
             Customer item = new Customer(ReaderColumnReadNullableValueType<Int32>(reader, "ID", COLUMN_PREFIX));
 
             item.CustomerName = ReaderColumnReadObject<string>(reader, "CustomerName", COLUMN_PREFIX);
-            //item.ContactId = ReaderColumnReadObject<int>(reader, "ContactId", COLUMN_PREFIX);
-            //item.PicturePath = ReaderColumnReadValueType<int>(reader, "PicturePath", COLUMN_PREFIX);
+            item.ContactId = ReaderColumnReadValueType<int>(reader, "ContactId", COLUMN_PREFIX);
+            item.PicturePath = ReaderColumnReadObject<string>(reader, "PicturePath", COLUMN_PREFIX);
 
             return item;
         }

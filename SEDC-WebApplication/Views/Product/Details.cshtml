@@ -10,14 +10,14 @@
         <div class="col-md-8">
             <div class="card-body">
                 <h3 class="card-title">@Model.Name</h3>
-                <ul class="list-group list-group-flush">
+                @*<ul class="list-group list-group-flush">
                     <li class="list-group-item">@Model.ProductDescription</li>
-                </ul>
+                </ul>*@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">@Model.Price RSD</li>
                 </ul>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">@if (Model.Discounted) {<p>Discounted</p> } else { <p></p>}</li>
+                    <li class="list-group-item">@if (Model.Discounted) {<p>Discounted</p> } else { <p>No discount</p>}</li>
                 </ul>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">@if (Model.Active) {<p>Active</p> } else { <p></p>}</li>

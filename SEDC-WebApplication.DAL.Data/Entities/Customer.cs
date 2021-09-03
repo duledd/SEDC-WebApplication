@@ -9,12 +9,13 @@ namespace SEDC_WebApplication.DAL.Data.Entities
     public class Customer : User
     {
         public Customer(int? id)
-            : base (id)
+               : base (id)
         {
         }
         public string CustomerName { get; set; }
 
         public int ContactId { get; set; }
+        public Contact Contact { get; set; }
         public string PicturePath { get; set; }
     }
 }

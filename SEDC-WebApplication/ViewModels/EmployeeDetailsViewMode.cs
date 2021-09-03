@@ -13,6 +13,7 @@ namespace SEDC_WebApplication.ViewModels
         public string EmployeeEmail { get; set; }
         public string RoleEmployee { get; set; }
         public string EmployeePol { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public string EmployeeImage { get; set; }
     }
 }

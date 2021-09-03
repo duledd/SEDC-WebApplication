@@ -19,5 +19,6 @@ namespace SEDC_WebApplication.DAL.Data.Entities
         public int RoleId { get; set; }
 
         public DateTime DateOfBirth { get; set; }
+        public string PicturePath { get; set; }
     }
 }

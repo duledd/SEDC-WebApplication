@@ -43,14 +43,15 @@ namespace SEDC_WebApplication.Controllers
             ProductDTO product = _productRepository.GetProductById(id);
 
             ProductDetailsViewModel productVM = new ProductDetailsViewModel();
-            productVM.ProductId = product.Id;
+            //productVM.ProductId = product.Id;
             productVM.PageTitle = "Product details";
             productVM.Name = product.Name;
-            productVM.ProductDescription = product.ProductDescription;
+            //productVM.ProductDescription = product.ProductDescription;
             productVM.Price = product.Price;
             productVM.Discounted = product.Discounted;
             productVM.Active = product.Active;
             productVM.Deleted = product.Deleted;
+            productVM.ProductSize = product.ProductSize;
             productVM.ProductImage = product.ImagePath;
 
             return View(productVM);
@@ -78,37 +79,38 @@ namespace SEDC_WebApplication.Controllers
                 }
                 ProductDTO product = new ProductDTO
                 {
+                    Id = null,
                     Name = model.ProductName,
                     Price = model.UnitPrice,
                     Discounted = model.IsDiscounted,
                     Active = model.IsActive,
                     Deleted = model.IsDeleted,
                     ProductSize = model.Size,
-                    ProductDescription = model.Description,
+                    //ProductDescription = model.Description,
                     ImagePath = "~/img/" + uniqueFileName
                 };
                 ProductDTO newProduct = _productRepository.Add(product);
-                return RedirectToAction("List");
+                return RedirectToAction("List", new { id = newProduct.Id });
             } else
             {
                 return View();
             }
         }
 
-        [HttpGet]
-        [Route("Edit/{id}")]
-        public IActionResult Edit(int id)
-        {
-            ProductDTO product = _productRepository.GetProductById(id);
-            ProductEditViewModel productEditViewModel = new ProductEditViewModel
-            {
-                ProductId = product.Id,
-                Name = product.Name,
-                Price = product.Price,
-                ProductDescription = product.ProductDescription
-            };
-            return View(productEditViewModel);
-        }
+        //[HttpGet]
+        //[Route("Edit/{id}")]
+        //public IActionResult Edit(int id)
+        //{
+        //    ProductDTO product = _productRepository.GetProductById(id);
+        //    ProductEditViewModel productEditViewModel = new ProductEditViewModel
+        //    {
+        //        ProductId = product.Id,
+        //        Name = product.Name,
+        //        Price = product.Price,
+        //        ProductDescription = product.ProductDescription
+        //    };
+        //    return View(productEditViewModel);
+        //}
 
         //[HttpPost]
         //[Route("Edit/{id}")]

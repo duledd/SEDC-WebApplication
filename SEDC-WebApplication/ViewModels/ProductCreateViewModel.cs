@@ -16,7 +16,7 @@ namespace SEDC_WebApplication.ViewModels
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public string Size { get; set; }
-        public string Description { get; set; }
+        //public string Description { get; set; }
         public IFormFile PicturePath { get; set; }
     }
 }
