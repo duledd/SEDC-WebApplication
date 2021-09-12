@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SEDC_WebApplicationEntityFactory.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace SEDC_WebApplication.BLL.Logic.Models
         public bool Active { get; set; }
         public bool Deleted { get; set; }
         public string ProductSize { get; set; }
+        public List<OrderItem> ProductOrderItems { get; set; }
         public string ImagePath { get; set; }
     }
 }

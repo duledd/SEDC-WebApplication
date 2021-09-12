@@ -60,6 +60,9 @@ namespace SEDC_WebApplication.DAL.Data.Implementations
                 case EntityStateEnum.Updated:
                     this.Update(item);
                     break;
+                case EntityStateEnum.Deleted:
+                    this.Delete(item);
+                    break;
                 case EntityStateEnum.Loaded:
                     break;
                 default:
@@ -204,6 +207,37 @@ namespace SEDC_WebApplication.DAL.Data.Implementations
                 cn.Close();
             }
             return results;
+        }
+
+        private void Delete(Product item)
+        {
+            SqlConnection cn = ConnectionGet();
+
+            SqlCommand cmd = CommandGet(cn);
+            cmd.CommandText = "Product_Del";
+
+
+            SqlParameter prm = new SqlParameter();
+            prm.ParameterName = "@ID";
+            prm.SqlDbType = SqlDbType.Int;
+            prm.Value = item.Id.Value;
+            cmd.Parameters.Add(prm);
+
+            try
+            {
+                cn.Open();
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //DMLogger.Singleton.LogError(ex, item);
+                throw;
+            }
+            finally
+            {
+                cn.Close();
+            }
         }
 
 

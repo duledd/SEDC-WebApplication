@@ -16,11 +16,11 @@ namespace SEDC_WebApplication.Controllers
     public class CustomerController : Controller
     {
         private readonly ICustomerRepository _customerRepository;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
         //private List<Customer> customers;
 
-        public CustomerController(ICustomerRepository customerRepository, IHostingEnvironment hostingEnvironment)
+        public CustomerController(ICustomerRepository customerRepository, IWebHostEnvironment hostingEnvironment)
         {
             _customerRepository = customerRepository;
             _hostingEnvironment = hostingEnvironment;
@@ -81,6 +81,7 @@ namespace SEDC_WebApplication.Controllers
                     Id = null,
                     Name = model.Name,
                     Email = model.Email,
+                    Address = model.Address,
                     CustomerContactId = model.ContactId,
                     //DateOfBirth = model.DateOfBirth,
                     PicturePath = "~/img/" + uniqueFileName

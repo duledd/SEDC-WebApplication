@@ -1,4 +1,6 @@
 ﻿using SEDC_WebApplication.BLL.Logic.Models.Enum;
+using SEDC_WebApplication.DAL.Data.Entities;
+using SEDC_WebApplicationEntityFactory.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +22,7 @@ namespace SEDC_WebApplication.BLL.Logic.Models
         public string Email { get; set; }
         public RoleEnum Role { get; set; }
         public string Pol { get; set; }
+        public List<Order> Orders { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Picture { get; set; }
     }

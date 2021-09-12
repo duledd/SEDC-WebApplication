@@ -16,11 +16,11 @@ namespace SEDC_WebApplication.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
         //private List<Employee> employees;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, IHostingEnvironment hostingEnvironment)
+        public EmployeeController(IEmployeeRepository employeeRepository, IWebHostEnvironment hostingEnvironment)
         {
             _employeeRepository = employeeRepository;
             _hostingEnvironment = hostingEnvironment;

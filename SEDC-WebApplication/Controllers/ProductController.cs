@@ -16,11 +16,11 @@ namespace SEDC_WebApplication.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
         //private List<Product> products;
 
-        public ProductController(IProductRepository productRepository, IHostingEnvironment hostingEnvironment)
+        public ProductController(IProductRepository productRepository, IWebHostEnvironment hostingEnvironment)
         {
             _productRepository = productRepository;
             _hostingEnvironment = hostingEnvironment;

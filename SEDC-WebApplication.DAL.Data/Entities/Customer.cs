@@ -13,9 +13,9 @@ namespace SEDC_WebApplication.DAL.Data.Entities
         {
         }
         public string CustomerName { get; set; }
-
         public int ContactId { get; set; }
-        public Contact Contact { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
         public string PicturePath { get; set; }
     }
 }

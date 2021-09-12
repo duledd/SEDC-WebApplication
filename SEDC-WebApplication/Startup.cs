@@ -55,6 +55,8 @@ namespace SEDC_WebApplication
             services.AddScoped<ICustomerDAL, CustomerDAL>();
 
             services.AddScoped<IProductDAL, ProductDAL>();
+
+            //services.AddScoped<IOrderDAL, OrderDAL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
