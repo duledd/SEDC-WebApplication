@@ -38,9 +38,9 @@ namespace SEDC_WebAPI.Repositories.Implementations
         }
 
 
-        //public ProductDTO Delete(ProductDTO product)
-        //{
-        //    return _productManager.Delete(product);
-        //}
+        public ProductDTO Delete(ProductDTO product)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

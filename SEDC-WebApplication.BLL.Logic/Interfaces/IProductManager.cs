@@ -12,6 +12,6 @@ namespace SEDC_WebApplication.BLL.Logic.Interfaces
         IEnumerable<ProductDTO> GetAllProducts();
         ProductDTO GetProductById(int id);
         ProductDTO Add(ProductDTO product);
-        //ProductDTO Delete(ProductDTO product);
+        ProductDTO Delete(ProductDTO product);
     }
 }

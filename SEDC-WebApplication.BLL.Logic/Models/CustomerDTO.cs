@@ -1,4 +1,5 @@
-﻿using SEDC_WebApplicationEntityFactory.Entities;
+﻿//using SEDC_WebApplicationEntityFactory.Entities;
+using SEDC_WebApplicationDataBaseFactory.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,9 +14,6 @@ namespace SEDC_WebApplication.Models
 
         [Required(ErrorMessage = "Required field!")]
         public string Name { get; set; }
-
-        //[RegularExpression(@"^([0-9a-zA-Z]([\+\-_\.][0-9a-zA-Z]+)*)+@(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]*\.)+[a-zA-Z0-9]{2,3})$", ErrorMessage = "Your email address is not in a valid format. Example of correct format: joe.example@example.org")]
-        //[DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public string Address { get; set; }
         public int CustomerContactId { get; set; }

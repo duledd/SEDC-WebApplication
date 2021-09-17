@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,8 +12,11 @@ using SEDC_WebAPI.Repositories.Implementations;
 using SEDC_WebAPI.Repositories.Interfaces;
 using SEDC_WebApplication.BLL.Logic.Implementations;
 using SEDC_WebApplication.BLL.Logic.Interfaces;
-using SEDC_WebApplicationEntityFactory.Implementations;
-using SEDC_WebApplicationEntityFactory.Interfaces;
+using SEDC_WebApplicationDataBaseFactory;
+using SEDC_WebApplicationDataBaseFactory.Implementations;
+using SEDC_WebApplicationDataBaseFactory.Interfaces;
+//using SEDC_WebApplicationEntityFactory.Implementations;
+//using SEDC_WebApplicationEntityFactory.Interfaces;
 //using SEDC_WebApplication.DAL.Data.Implementations;
 //using SEDC_WebApplication.DAL.Data.Interfaces;
 using System;
@@ -35,6 +39,19 @@ namespace SEDC_WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore); ;
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SEDC2")));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                        builder.AllowAnyMethod();
+                        builder.AllowAnyHeader();
+                    });
+            });
 
             services.AddAutoMapper(typeof(EmployeeManager));
             services.AddAutoMapper(typeof(CustomerManager));
@@ -86,6 +103,8 @@ namespace SEDC_WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

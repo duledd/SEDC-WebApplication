@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using SEDC_WebAPI.Repositories.Interfaces;
 using SEDC_WebApplication.BLL.Logic.Models;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace SEDC_WebAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -27,6 +29,7 @@ namespace SEDC_WebAPI.Controllers
             //products = _productRepository.GetAllProducts().ToList();
         }
         // GET: api/<ProductController>
+        
         [HttpGet]
         public IEnumerable<ProductDTO> Get()
         {
@@ -53,14 +56,14 @@ namespace SEDC_WebAPI.Controllers
         {
         }
 
-        // DELETE api/<ProductController>/5
-        //[HttpDelete("{id}")]
-        //public bool Delete(int id)
-        //{
-        //    var product = _productRepository.GetProductById(id);
-        //    _productRepository.Delete(product);
-        //    var productDeleted = _productRepository.GetProductById(id);
-        //    return productDeleted.Deleted;
-        //}
+        //DELETE api/<ProductController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            //var product = _productRepository.GetProductById(id);
+            //_productRepository.Delete(product);
+            //var productDeleted = _productRepository.GetProductById(id);
+            //return productDeleted.Deleted;
+        }
     }
 }

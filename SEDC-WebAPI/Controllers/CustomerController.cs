@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using SEDC_WebAPI.Repositories.Interfaces;
 using SEDC_WebApplication.Models;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace SEDC_WebAPI.Controllers
 {
+    //[EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase

@@ -1,6 +1,7 @@
 ﻿using SEDC_WebApplication.BLL.Logic.Models.Enum;
 using SEDC_WebApplication.DAL.Data.Entities;
-using SEDC_WebApplicationEntityFactory.Entities;
+using SEDC_WebApplicationDataBaseFactory.Entities;
+//using SEDC_WebApplicationEntityFactory.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,10 +16,6 @@ namespace SEDC_WebApplication.BLL.Logic.Models
 
         [Required(ErrorMessage = "Required field!")]
         public string Name { get; set; }
-
-        //[Required(ErrorMessage = "Required")]
-        //[StringLength(50, ErrorMessage = "Max 50 characters")]
-        //[RegularExpression(@"\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b")]
         public string Email { get; set; }
         public RoleEnum Role { get; set; }
         public string Pol { get; set; }

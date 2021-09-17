@@ -3,8 +3,10 @@ using SEDC_WebApplication.BLL.Logic.Interfaces;
 //using SEDC_WebApplication.DAL.Data.Entities;
 //using SEDC_WebApplication.DAL.Data.Interfaces;
 using SEDC_WebApplication.Models;
-using SEDC_WebApplicationEntityFactory.Entities;
-using SEDC_WebApplicationEntityFactory.Interfaces;
+using SEDC_WebApplicationDataBaseFactory.Entities;
+using SEDC_WebApplicationDataBaseFactory.Interfaces;
+//using SEDC_WebApplicationEntityFactory.Entities;
+//using SEDC_WebApplicationEntityFactory.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +50,7 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
                     throw new Exception($"Customer with id {id} not found.");
                 }
                 CustomerDTO customerDTO = _mapper.Map<CustomerDTO>(customer);
-                customerDTO.Orders = _orderDAL.GetByCustomerId((int)customer.CustomerId);
+                //customerDTO.Orders = _orderDAL.GetByCustomerId((int)customer.CustomerId);
                 return customerDTO;
             }
             catch (Exception ex)
@@ -56,6 +58,5 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
                 throw ex;
             }
         }
-
     }
 }

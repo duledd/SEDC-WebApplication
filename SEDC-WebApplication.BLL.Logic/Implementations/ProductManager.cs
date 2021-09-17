@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using SEDC_WebApplication.BLL.Logic.Interfaces;
 using SEDC_WebApplication.BLL.Logic.Models;
-using SEDC_WebApplicationEntityFactory.Entities;
-using SEDC_WebApplicationEntityFactory.Interfaces;
+using SEDC_WebApplicationDataBaseFactory.Entities;
+using SEDC_WebApplicationDataBaseFactory.Interfaces;
+//using SEDC_WebApplicationEntityFactory.Entities;
+//using SEDC_WebApplicationEntityFactory.Interfaces;
 //using SEDC_WebApplication.DAL.Data.Entities;
 //using SEDC_WebApplication.DAL.Data.Interfaces;
 using System;
@@ -31,6 +33,11 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
             return product;
         }
 
+        public ProductDTO Delete(ProductDTO product)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<ProductDTO> GetAllProducts()
         {
             return _mapper.Map<List<ProductDTO>>(_productDAL.GetAll(0, 50));
@@ -47,7 +54,7 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
                     throw new Exception($"Product with id {id} not found.");
                 }
                 ProductDTO productDTO = _mapper.Map<ProductDTO>(product);
-                productDTO.ProductOrderItems = _orderItemDAL.GetByProductId((int)product.ProductId);
+                //productDTO.ProductOrderItems = _orderItemDAL.GetByProductId((int)product.ProductId);
                 return productDTO;
             }
             catch (Exception ex)

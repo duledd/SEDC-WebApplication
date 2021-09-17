@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using SEDC_WebApplication.BLL.Logic.Interfaces;
 using SEDC_WebApplication.BLL.Logic.Models;
-using SEDC_WebApplicationEntityFactory.Entities;
-using SEDC_WebApplicationEntityFactory.Interfaces;
+using SEDC_WebApplicationDataBaseFactory.Entities;
+using SEDC_WebApplicationDataBaseFactory.Interfaces;
+//using SEDC_WebApplicationEntityFactory.Entities;
+//using SEDC_WebApplicationEntityFactory.Interfaces;
 //using SEDC_WebApplication.DAL.Data.Entities;
 //using SEDC_WebApplication.DAL.Data.Interfaces;
 using System;
@@ -57,14 +59,13 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
                     throw new Exception($"Employee with id {id} not found.");
                 }
                 EmployeeDTO employeeDTO = _mapper.Map<EmployeeDTO>(employee);
-                employeeDTO.Orders = _orderDAL.GetByEmployeeId((int)employee.EmployeeId);
+                //employeeDTO.Orders = _orderDAL.GetByEmployeeId((int)employee.EmployeeId);
                 return employeeDTO;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
         }
         //private readonly IEmployeeDAL _employeeDAL;
         //private readonly IMapper _mapper;

@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SEDC-WebApplication.DAL.Data\SEDC-WebApplication.DAL.Data.csproj" />
+    <ProjectReference Include="..\SEDC-WebApplicationDataBaseFactory\SEDC-WebApplicationDataBaseFactory.csproj" />
     <ProjectReference Include="..\SEDC-WebApplicationEntityFactory\SEDC-WebApplicationEntityFactory.csproj" />
   </ItemGroup>
 
