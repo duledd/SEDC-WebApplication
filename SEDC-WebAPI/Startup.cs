@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using SEDC_WebAPI.Repositories.Implementations;
 using SEDC_WebAPI.Repositories.Interfaces;
+using SEDC_WebAPI.Services.Implementations;
+using SEDC_WebAPI.Services.Interfaces;
 using SEDC_WebApplication.BLL.Logic.Implementations;
 using SEDC_WebApplication.BLL.Logic.Interfaces;
 using SEDC_WebApplicationDataBaseFactory;
@@ -56,33 +58,31 @@ namespace SEDC_WebAPI
             services.AddAutoMapper(typeof(EmployeeManager));
             services.AddAutoMapper(typeof(CustomerManager));
             services.AddAutoMapper(typeof(ProductManager));
+            services.AddAutoMapper(typeof(OrderManager));
 
 
             services.AddScoped<ICustomerRepository, DataBaseCustomerRepository>();
-
             services.AddScoped<IProductRepository, DataBaseProductRepository>();
-
             services.AddScoped<IEmployeeRepository, DataBaseEmployeeRepository>();
+            services.AddScoped<IOrderRepository, DataBaseOrderRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             //BLL
             services.AddScoped<IEmployeeManager, EmployeeManager>();
-
             services.AddScoped<ICustomerManager, CustomerManager>();
-
             services.AddScoped<IProductManager, ProductManager>();
+            services.AddScoped<IOrderManager, OrderManager>();
+            services.AddScoped<IUserManager, UserManager>();
 
             //DAL 
             //services.AddScoped<IEmployeeDAL, EmployeeDAL>();
             services.AddScoped<IEmployeeDAL, EmployeeRepository>();
-
             //services.AddScoped<ICustomerDAL, CustomerDAL>();
             services.AddScoped<ICustomerDAL, CustomerRepository>();
-
             //services.AddScoped<IProductDAL, ProductDAL>();
             services.AddScoped<IProductDAL, ProductRepository>();
-
             services.AddScoped<IOrderDAL, OrderRepository>();
-            services.AddScoped<IOrderItemDAL, OrderItemRepository>();
+            services.AddScoped<IUserDAL, UserRepository>();
 
             services.AddSwaggerGen(c =>
             {

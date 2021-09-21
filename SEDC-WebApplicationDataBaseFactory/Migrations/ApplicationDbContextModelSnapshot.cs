@@ -47,13 +47,13 @@ namespace SEDC_WebApplicationDataBaseFactory.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CustomerId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Number")
@@ -222,11 +222,15 @@ namespace SEDC_WebApplicationDataBaseFactory.Migrations
                 {
                     b.HasOne("SEDC_WebApplicationDataBaseFactory.Entities.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SEDC_WebApplicationDataBaseFactory.Entities.Employee", "Employee")
                         .WithMany("Orders")
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 
@@ -236,7 +240,7 @@ namespace SEDC_WebApplicationDataBaseFactory.Migrations
             modelBuilder.Entity("SEDC_WebApplicationDataBaseFactory.Entities.OrderItem", b =>
                 {
                     b.HasOne("SEDC_WebApplicationDataBaseFactory.Entities.Order", "Order")
-                        .WithMany("OrderItems")
+                        .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -277,11 +281,6 @@ namespace SEDC_WebApplicationDataBaseFactory.Migrations
             modelBuilder.Entity("SEDC_WebApplicationDataBaseFactory.Entities.Contact", b =>
                 {
                     b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("SEDC_WebApplicationDataBaseFactory.Entities.Order", b =>
-                {
-                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("SEDC_WebApplicationDataBaseFactory.Entities.Product", b =>

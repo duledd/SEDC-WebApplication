@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SEDC_WebAPI.Controllers
 {
-    //[EnableCors("CorsPolicy")]
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase

@@ -16,12 +16,10 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
     public class ProductManager : IProductManager
     {
         private readonly IProductDAL _productDAL;
-        private readonly IOrderItemDAL _orderItemDAL;
         private readonly IMapper _mapper;
-        public ProductManager(IProductDAL productDAL, IOrderItemDAL orderItemDAL, IMapper mapper)
+        public ProductManager(IProductDAL productDAL, IMapper mapper)
         {
             _productDAL = productDAL;
-            _orderItemDAL = orderItemDAL;
             _mapper = mapper;
         }
 

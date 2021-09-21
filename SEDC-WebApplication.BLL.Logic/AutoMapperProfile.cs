@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using SEDC_WebApplication.BLL.Logic.Models;
-using SEDC_WebApplication.DAL.Data.Entities;
+//using SEDC_WebApplication.DAL.Data.Entities;
 using SEDC_WebApplication.Models;
+using SEDC_WebApplicationDataBaseFactory.Entities;
 using System;
 
 namespace SEDC_WebApplication.BLL.Logic
@@ -104,7 +105,7 @@ namespace SEDC_WebApplication.BLL.Logic
                 .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, src => src.MapFrom(src => src.Name))
                 .ForMember(dest => dest.RoleId, src => src.MapFrom(src => src.Role))
-                .ForMember(dest => dest.RoleId, src => src.Ignore())
+                .ForMember(dest => dest.Role, src => src.Ignore())
                 .ForMember(dest => dest.DateOfBirth, src => src.MapFrom(src => src.DateOfBirth))
                 .ForMember(dest => dest.UserName, src => src.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Gender, src => src.MapFrom(src => src.Pol))
@@ -168,6 +169,24 @@ namespace SEDC_WebApplication.BLL.Logic
                 .ForMember(dest => dest.IsDeleted, src => src.MapFrom(src => src.Deleted))
                 .ForMember(dest => dest.IsDiscounted, src => src.MapFrom(src => src.Discounted))
                 .ForMember(dest => dest.Size, src => src.MapFrom(src => src.ProductSize));
+
+
+            //ORDER
+            CreateMap<SEDC_WebApplicationDataBaseFactory.Entities.Order, OrderDTO>()
+                .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Number, src => src.MapFrom(src => src.Number))
+                .ForMember(dest => dest.Date, src => src.MapFrom(src => src.Date))
+                .ForMember(dest => dest.TotalAmount, src => src.MapFrom(src => src.TotalAmount));
+
+            CreateMap<OrderDTO, SEDC_WebApplicationDataBaseFactory.Entities.Order>()
+                .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Number, src => src.MapFrom(src => src.Number))
+                .ForMember(dest => dest.Date, src => src.MapFrom(src => src.Date))
+                .ForMember(dest => dest.TotalAmount, src => src.MapFrom(src => src.TotalAmount));
+
+
+            // USER
+            CreateMap<User, UserDTO>();
         }
     }
 }

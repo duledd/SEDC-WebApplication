@@ -42,10 +42,6 @@ namespace SEDC_WebApplicationDataBaseFactory.Implementations
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
-                //User user = new User();
-                ////user.Customer = item;
-                //db.Users.Add(user);
-
                 Contact contact = new Contact();
                 contact.Customer = item;
                 db.Contacts.Add(contact);

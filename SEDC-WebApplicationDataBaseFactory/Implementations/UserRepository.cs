@@ -10,37 +10,21 @@ using System.Threading.Tasks;
 
 namespace SEDC_WebApplicationDataBaseFactory.Implementations
 {
-    public class OrderItemRepository : IOrderItemDAL
+    public class UserRepository : IUserDAL
     {
         private IConfiguration Configuration { get; set; }
-        public OrderItemRepository(IConfiguration configuration)
+        public UserRepository(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-        public List<OrderItem> GetAll(int skip, int take)
-        {
-            throw new NotImplementedException();
-        }
-
-        public OrderItem GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<OrderItem> GetByProductId(int id)
+        public User GetUserByUserNameAndPassword(string username, string password)
         {
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
-                List<OrderItem> result = db.OrderItems
-                    .Include(o => o.Order).Where(e => e.ProductId == id).ToList();
+                User result = db.Users.First(u => u.UserName == username && u.Password == password);
                 return result;
             }
-        }
-
-        public void Save(OrderItem item)
-        {
-            throw new NotImplementedException();
         }
     }
 }

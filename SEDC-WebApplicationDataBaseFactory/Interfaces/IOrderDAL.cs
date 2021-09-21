@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SEDC_WebApplicationDataBaseFactory.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace SEDC_WebApplicationDataBaseFactory.Interfaces
 {
     public interface IOrderDAL
     {
-        //void Save(Order item);
-        //Order GetById(int id);
-        //List<Order> GetByEmployeeId(int id);
-        //List<Order> GetAll(int skip, int take);
+        void Save(Order item);
+        Order GetById(int id);
+        List<Order> GetByEmployeeId(int id);
+        List<Order> GetAll(int skip, int take);
     }
 }
