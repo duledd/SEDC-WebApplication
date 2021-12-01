@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="overlay"></div>
+    <h1>New Pizza Order</h1>
+    <nav>
+      <li><a href="login.html">Home</a></li>
+      <li><a href="product.html">Product</a></li>
+      <li class="cart">
+        <a href="order.html">
+          <i class="fas fa-shopping-cart"><span class="cart span">0</span></i>
+        </a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown__btn">
+          <i class="fas fa-user"> User</i>
+        </a>
+        <a href="orderHistory.html" class="dropdown__link dropdown__link--one">Order History</a>
+        <a href="#" class="dropdown__link dropdown__link--two">Edit Profile</a>
+        <a href="#" class="dropdown__link dropdown__link--three" id="log-out"><i class="fas fa-sign-out-alt">Log out</i></a>
+        <!-- <a href="#" class="dropdown__link dropdown__link--four">Link 4</a> -->
+      </li>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="entries">
+      <form class="form-container" id="form">
+        <h3>Change your info</h3>
+        <input type="text" id="name" placeholder="name">
+        <input type="text" id="address" placeholder="address">
+        <input type="email" id="email" placeholder="email">
+        <button class="postForm" type="submit" id="PostBtn">POST</button>
+      </form>
+      <div class="del-container">
+        <h3>Edit by ID</h3>
+        <input type="number" id="inputId" placeholder="id">
+        <!-- <button id="DelBtn">DELETE</button> -->
+        <button id="editBtn">EDIT</button>
+      </div>
+    </div>
+  </div>
+  <script src="editPage.js"></script>
+  <script src="https://kit.fontawesome.com/dda42268fb.js" crossorigin="anonymous"></script>
+</body>
+</html>

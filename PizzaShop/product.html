@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="overlay"></div>
+    <h1>New Pizza Order</h1>
+    <nav>
+      <li><a href="login.html">Home</a></li>
+      <li><a href="#">Product</a></li>
+      <li class="cart">
+        <a href="order.html">
+          <i class="fas fa-shopping-cart"><span class="cart span">0</span></i>
+        </a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown__btn">
+          <i class="fas fa-user"> User</i>
+        </a>
+        <a href="orderHistory.html" class="dropdown__link dropdown__link--one">Order History</a>
+        <a href="editPage.html" class="dropdown__link dropdown__link--two">Edit Profile</a>
+        <a href="#" class="dropdown__link dropdown__link--three" id="log-out"><i class="fas fa-sign-out-alt">Log out</i></a>
+        <!-- <a href="#" class="dropdown__link dropdown__link--four">Link 4</a> -->
+      </li>
+    </nav>
+  </header>
+  <div class="container">
+    
+    <div class="list"></div>
+  </div>
+  <script src="product.js"></script>
+  <script src="https://kit.fontawesome.com/dda42268fb.js" crossorigin="anonymous"></script>
+</body>
+</html>
