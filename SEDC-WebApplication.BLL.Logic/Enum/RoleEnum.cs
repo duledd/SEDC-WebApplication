@@ -10,7 +10,8 @@ namespace SEDC_WebApplication.BLL.Logic.Models.Enum
     {
         [Display(Name = "Menadzer")]
         Manager = 1,
-        Sales = 2,
-        Operater = 3
+        Operater = 5,
+        Sales = 6,
+        Customer = 7
     }
 }

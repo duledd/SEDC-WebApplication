@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using SEDC_WebAPI.Helpers;
 using SEDC_WebAPI.Repositories.Interfaces;
+using SEDC_WebAPI.Services.Interfaces;
 using SEDC_WebApplication.BLL.Logic.Models;
 using System;
 using System.Collections.Generic;
@@ -12,48 +15,50 @@ using System.Threading.Tasks;
 
 namespace SEDC_WebAPI.Controllers
 {
+    //[Authorize(Roles = AuthorizationRoles.Admin)]
     [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IDataService _dataService;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
         //private List<Product> products;
 
-        public ProductController(IProductRepository productRepository, IWebHostEnvironment hostingEnvironment)
+        public ProductController(IDataService dataService, IWebHostEnvironment hostingEnvironment)
         {
-            _productRepository = productRepository;
+            _dataService = dataService;
             _hostingEnvironment = hostingEnvironment;
             //products = _productRepository.GetAllProducts().ToList();
         }
         // GET: api/<ProductController>
-        
+        [Authorize(Roles = AuthorizationRoles.Client)]
         [HttpGet]
         public IEnumerable<ProductDTO> Get()
         {
-            return _productRepository.GetAllProducts().ToList();
+            return _dataService.GetAllProducts().ToList();
         }
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
         public ProductDTO Get(int id)
         {
-            return _productRepository.GetProductById(id);
+            return _dataService.GetProductById(id);
         }
 
         // POST api/<ProductController>
         [HttpPost]
         public void Post([FromBody] ProductDTO product)
         {
-            _productRepository.Add(product);
+            _dataService.Add(product);
         }
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] ProductDTO product)
         {
+            _dataService.UpdateProduct(id, product);
         }
 
         //DELETE api/<ProductController>/5

@@ -26,7 +26,6 @@ namespace SEDC_WebApplicationDataBaseFactory.Implementations
                 return result;
             }
         }
-
         public Customer GetById(int id)
         {
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
@@ -36,18 +35,31 @@ namespace SEDC_WebApplicationDataBaseFactory.Implementations
                 return result;
             }
         }
-
         public void Save(Customer item)
         {
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
+                //if (item.Contact == null)
+                //{
+                //    item.Contact = new Contact();
+                //}
+
                 Contact contact = new Contact();
                 contact.Customer = item;
                 db.Contacts.Add(contact);
 
-                db.Customers.Add(item);
-
+                db.Users.Add(item);
+                db.SaveChanges();
+            }
+        }
+        public void Update(Customer item)
+        {
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
+            using (var db = new ApplicationDbContext(optionBuilder.Options))
+            {
+                //db.Entry<Employee>(item).State = EntityState.Modified;
+                db.Update(item);
                 db.SaveChanges();
             }
         }

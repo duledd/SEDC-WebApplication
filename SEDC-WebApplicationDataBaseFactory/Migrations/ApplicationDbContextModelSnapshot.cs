@@ -47,13 +47,13 @@ namespace SEDC_WebApplicationDataBaseFactory.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Number")
@@ -164,6 +164,9 @@ namespace SEDC_WebApplicationDataBaseFactory.Migrations
                     b.Property<string>("PicturePath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
@@ -210,9 +213,6 @@ namespace SEDC_WebApplicationDataBaseFactory.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
                     b.HasIndex("RoleId");
 
                     b.HasDiscriminator().HasValue("Employee");
@@ -222,15 +222,11 @@ namespace SEDC_WebApplicationDataBaseFactory.Migrations
                 {
                     b.HasOne("SEDC_WebApplicationDataBaseFactory.Entities.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("SEDC_WebApplicationDataBaseFactory.Entities.Employee", "Employee")
                         .WithMany("Orders")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
 
                     b.Navigation("Customer");
 
@@ -240,7 +236,7 @@ namespace SEDC_WebApplicationDataBaseFactory.Migrations
             modelBuilder.Entity("SEDC_WebApplicationDataBaseFactory.Entities.OrderItem", b =>
                 {
                     b.HasOne("SEDC_WebApplicationDataBaseFactory.Entities.Order", "Order")
-                        .WithMany()
+                        .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -281,6 +277,11 @@ namespace SEDC_WebApplicationDataBaseFactory.Migrations
             modelBuilder.Entity("SEDC_WebApplicationDataBaseFactory.Entities.Contact", b =>
                 {
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("SEDC_WebApplicationDataBaseFactory.Entities.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("SEDC_WebApplicationDataBaseFactory.Entities.Product", b =>

@@ -32,7 +32,7 @@ namespace SEDC_WebApplicationDataBaseFactory.Implementations
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
             using (var db = new ApplicationDbContext(optionBuilder.Options))
             {
-                Employee result = db.Employees.First(e => e.Id == id);
+                Employee result = db.Employees.FirstOrDefault(e => e.Id == id);
                 return result;
             }
         }
@@ -44,16 +44,19 @@ namespace SEDC_WebApplicationDataBaseFactory.Implementations
             {
                 //User user = new User();
                 //user.Employee = item;
-                //db.Users.Add(user);
-
-                //Role role = new Role();
-                ////role.Employee = item;
-                //db.Roles.Add(role);
-
-                db.Employees.Add(item);
-
+                db.Users.Add(item);
                 db.SaveChanges();
             }
         }
+        public void Update(Employee item)
+        {
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
+            using (var db = new ApplicationDbContext(optionBuilder.Options))
+            {
+                //db.Entry<Employee>(item).State = EntityState.Modified;
+                db.Update(item);
+                db.SaveChanges();
+            }
+        } 
     }
 }

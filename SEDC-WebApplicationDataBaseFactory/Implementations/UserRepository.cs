@@ -26,5 +26,15 @@ namespace SEDC_WebApplicationDataBaseFactory.Implementations
                 return result;
             }
         }
+
+        public User GetUserById(int id)
+        {
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
+            using (var db = new ApplicationDbContext(optionBuilder.Options))
+            {
+                User result = db.Users.First(u => u.Id == id);
+                return result;
+            }
+        }
     }
 }

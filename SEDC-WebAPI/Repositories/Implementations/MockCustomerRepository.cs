@@ -62,5 +62,9 @@ namespace SEDC_WebAPI.Repositories.Implementations
             return _customerList.Where(x => x.Id == customer.Id).FirstOrDefault();
         }
 
+        public CustomerDTO UpdateCustomer(int id, CustomerDTO customer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

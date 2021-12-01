@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using SEDC_WebAPI.Helpers;
 using SEDC_WebAPI.Repositories.Interfaces;
+using SEDC_WebAPI.Services.Interfaces;
 using SEDC_WebApplication.BLL.Logic.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,49 +16,68 @@ using System.Threading.Tasks;
 
 namespace SEDC_WebAPI.Controllers
 {
+    [Authorize(Roles = AuthorizationRoles.Admin)]
     [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployeeRepository _employeeRepository;
+        private readonly IDataService _dataService;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly ILogger _logger;
 
         //private List<Employee> employees;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, IWebHostEnvironment hostingEnvironment)
+        public EmployeeController(IDataService dataService, ILogger logger, IWebHostEnvironment hostingEnvironment)
         {
-            _employeeRepository = employeeRepository;
+            _dataService = dataService;
             _hostingEnvironment = hostingEnvironment;
+            _logger = logger;
             //MockEmployeeRepository mockEmployeeRepository = new MockEmployeeRepository();
             //employees = mockEmployeeRepository.GetAllEmployees().ToList();
 
         }
         // GET: api/<EmployeeController>
+        //[Authorize(Roles = AuthorizationRoles.Admin)]
         [HttpGet]
-        public IEnumerable<EmployeeDTO> Get()
+        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> Get()
         {
-            return _employeeRepository.GetAllEmployees();
+            UserDTO user = (UserDTO)HttpContext.Items["User"];
+            List<EmployeeDTO> employees = (await _dataService.GetAllEmployees()).ToList();
+            return Ok((employees));
         }
 
         // GET api/<EmployeeController>/5
         [HttpGet("{id}")]
-        public EmployeeDTO Get(int id)
+        public async Task<EmployeeDTO> Get(int id)
         {
-            return _employeeRepository.GetEmployeeById(id);
+            //UserDTO user = (UserDTO)HttpContext.Items["User"];
+            //_logger.Information($"GetById {id} called.");
+            //return _employeeRepository.GetEmployeeById(id);
+            UserDTO user = (UserDTO)HttpContext.Items["User"];
+            LogEntryProperties log = new LogEntryProperties
+            {
+                User = user.UserName,
+                Date = DateTime.Now,
+                Message = $"User with id {user.Id}, name {user.UserName} call GetByEmployeeId {id}"
+            };
+            //_log.Repository.CreateLog(log);
+            _logger.Information(log.ToString());
+            return await _dataService.GetEmployeeById(id);
         }
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public void Post([FromBody] EmployeeDTO employee)
+        public async Task Post([FromBody] EmployeeDTO employee)
         {
-            _employeeRepository.Add(employee);
+            await _dataService.Add(employee);
         }
 
         // PUT api/<EmployeeController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task Put(int id, [FromBody] EmployeeDTO employee)
         {
+            await _dataService.UpdateEmployee(id, employee);
         }
 
         // DELETE api/<EmployeeController>/5

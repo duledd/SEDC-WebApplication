@@ -1,4 +1,5 @@
 ﻿using SEDC_WebAPI.Repositories.Interfaces;
+using SEDC_WebAPI.Services.Interfaces;
 using SEDC_WebApplication.BLL.Logic.Models;
 using SEDC_WebApplication.BLL.Logic.Models.Enum;
 using System;
@@ -60,6 +61,11 @@ namespace SEDC_WebAPI.Repositories.Implementations
             employee.Id = _employeeList.Max(p => p.Id) + 1;
             _employeeList.Add(employee);
             return _employeeList.Where(x => x.Id == employee.Id).FirstOrDefault();
+        }
+
+        public EmployeeDTO UpdateEmployee(int id, EmployeeDTO employee)
+        {
+            throw new NotImplementedException();
         }
     }
 }

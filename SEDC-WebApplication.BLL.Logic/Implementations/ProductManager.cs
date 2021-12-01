@@ -60,6 +60,14 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
                 throw ex;
             }
         }
+
+        public ProductDTO Update(int id, ProductDTO product)
+        {
+            Product productEntity = _mapper.Map<Product>(product);
+            _productDAL.Update(productEntity);
+            product = _mapper.Map<ProductDTO>(productEntity);
+            return product;
+        }
         //public ProductDTO Delete(ProductDTO product)
         //{
         //    Product productEntity = _mapper.Map<Product>(product);

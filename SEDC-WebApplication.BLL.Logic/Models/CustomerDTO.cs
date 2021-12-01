@@ -1,4 +1,5 @@
 ﻿//using SEDC_WebApplicationEntityFactory.Entities;
+using SEDC_WebApplication.BLL.Logic.Models.Enum;
 using SEDC_WebApplicationDataBaseFactory.Entities;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace SEDC_WebApplication.Models
         public string Email { get; set; }
         public string Address { get; set; }
         public int CustomerContactId { get; set; }
+        //public RoleEnum Role { get; set; }
         public List<Order> Orders { get; set; }
         public string PicturePath { get; set; }
     }

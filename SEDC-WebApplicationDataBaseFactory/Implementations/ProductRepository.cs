@@ -47,5 +47,15 @@ namespace SEDC_WebApplicationDataBaseFactory.Implementations
                 db.SaveChanges();
             }
         }
+
+        public void Update(Product item)
+        {
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
+            using (var db = new ApplicationDbContext(optionBuilder.Options))
+            {
+                db.Update(item);
+                db.SaveChanges();
+            }
+        }
     }
 }

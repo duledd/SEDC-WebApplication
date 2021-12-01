@@ -12,6 +12,6 @@ namespace SEDC_WebAPI.Repositories.Interfaces
         IEnumerable<CustomerDTO> GetAllCustomers();
         CustomerDTO GetCustomerById(int id);
         CustomerDTO Add(CustomerDTO customer);
-        //CustomerDTO Update(CustomerDTO customer);
+        CustomerDTO UpdateCustomer(int id, CustomerDTO customer);
     }
 }

@@ -77,6 +77,11 @@ namespace SEDC_WebAPI.Repositories.Implementations
             throw new NotImplementedException();
         }
 
+        public ProductDTO UpdateProduct(int id, ProductDTO product)
+        {
+            throw new NotImplementedException();
+        }
+
         //public Product Update(Product product)
         //{
         //    _productList.Where(x => x.Id == product.Id).FirstOrDefault();

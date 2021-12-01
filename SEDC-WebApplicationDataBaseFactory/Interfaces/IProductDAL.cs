@@ -12,5 +12,7 @@ namespace SEDC_WebApplicationDataBaseFactory.Interfaces
         void Save(Product item);
         Product GetById(int id);
         List<Product> GetAll(int skip, int take);
+
+        void Update(Product item);
     }
 }

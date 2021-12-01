@@ -12,5 +12,6 @@ namespace SEDC_WebApplication.BLL.Logic.Interfaces
         IEnumerable<CustomerDTO> GetAllCustomers();
         CustomerDTO GetCustomerById(int id);
         CustomerDTO Add(CustomerDTO customer);
+        CustomerDTO Update(int id, CustomerDTO customer);
     }
 }

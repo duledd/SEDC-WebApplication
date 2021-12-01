@@ -2,6 +2,7 @@
 using SEDC_WebApplication.BLL.Logic.Interfaces;
 using SEDC_WebApplication.BLL.Logic.Models;
 using SEDC_WebApplicationDataBaseFactory.Entities;
+using SEDC_WebApplicationDataBaseFactory.GenericRepository;
 using SEDC_WebApplicationDataBaseFactory.Interfaces;
 //using SEDC_WebApplicationEntityFactory.Entities;
 //using SEDC_WebApplicationEntityFactory.Interfaces;
@@ -17,16 +18,17 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
 {
     public class EmployeeManager : IEmployeeManager
     {
-        private readonly IEmployeeDAL _employeeDAL;
+        //private readonly IEmployeeDAL _employeeDAL;
+        private readonly IGenericRepository<Employee> _employeeDAL;
         private readonly IOrderDAL _orderDAL;
         private readonly IMapper _mapper;
-        public EmployeeManager(IEmployeeDAL employeeDAL, IOrderDAL orderDAL, IMapper mapper)
+        public EmployeeManager(IGenericRepository<Employee> employeeDAL, IOrderDAL orderDAL, IMapper mapper)
         {
             _employeeDAL = employeeDAL;
             _orderDAL = orderDAL;
             _mapper = mapper;
         }
-        public EmployeeDTO Add(EmployeeDTO employee)
+        public async Task<EmployeeDTO> Add(EmployeeDTO employee)
         {
             //Employee employeeEntity = new Employee(null)
             //{
@@ -34,14 +36,14 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
             //    UserName = employee.Email
             //};
             Employee employeeEntity = _mapper.Map<Employee>(employee);
-            _employeeDAL.Save(employeeEntity);
+            await _employeeDAL.Save(employeeEntity);
             employee = _mapper.Map<EmployeeDTO>(employeeEntity);
             return employee;
         }
 
-        public IEnumerable<EmployeeDTO> GetAllEmployees()
+        public async Task<IEnumerable<EmployeeDTO>> GetAllEmployees()
         {
-            List<EmployeeDTO> employeeDTOs = _mapper.Map<List<EmployeeDTO>>(_employeeDAL.GetAll(0, 50));
+            List<EmployeeDTO> employeeDTOs = _mapper.Map<List<EmployeeDTO>>(await _employeeDAL.GetAll(0, 50));
             //foreach(EmployeeDTO employeeDTO in employeeDTOs)
             //{
             //    employeeDTO.Orders = _orderDAL.GetByEmployeeId((int)employeeDTO.Id);
@@ -49,11 +51,11 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
             return employeeDTOs;
         }
 
-        public EmployeeDTO GetEmployeeById(int id)
+        public async Task<EmployeeDTO> GetEmployeeById(int id)
         {
             try
             {
-                Employee employee = _employeeDAL.GetById(id);
+                Employee employee = await _employeeDAL.GetById(id);
                 if (employee == null)
                 {
                     throw new Exception($"Employee with id {id} not found.");
@@ -66,6 +68,19 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
             {
                 throw ex;
             }
+        }
+
+        public async Task<EmployeeDTO> Update(int id, EmployeeDTO employee)
+        {
+            //Employee employeeEntity = new Employee(null)
+            //{
+            //    Name = employee.Name,
+            //    UserName = employee.Email
+            //};
+            Employee employeeEntity = _mapper.Map<Employee>(employee);
+            await _employeeDAL.Update(employeeEntity);
+            employee = _mapper.Map<EmployeeDTO>(employeeEntity);
+            return employee;
         }
         //private readonly IEmployeeDAL _employeeDAL;
         //private readonly IMapper _mapper;

@@ -11,7 +11,6 @@ namespace SEDC_WebApplicationDataBaseFactory.Entities
     {
         public string Name { get; set; }
         public string Gender { get; set; }
-        public int RoleId { get; set; }
         public DateTime DateOfBirth { get; set; }
 
         //[ForeignKey("RoleId")]

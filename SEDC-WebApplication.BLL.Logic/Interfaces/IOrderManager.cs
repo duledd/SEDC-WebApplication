@@ -1,4 +1,5 @@
 ﻿using SEDC_WebApplication.BLL.Logic.Models;
+using SEDC_WebApplicationDataBaseFactory.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace SEDC_WebApplication.BLL.Logic.Interfaces
         IEnumerable<OrderDTO> GetAllOrders();
         OrderDTO GetOrderById(int id);
         OrderDTO Add(OrderDTO order);
+        OrderDTO Update(int id, OrderDTO order);
+        IEnumerable<Order> GetOrdersByCustomerId(int id);
     }
 }

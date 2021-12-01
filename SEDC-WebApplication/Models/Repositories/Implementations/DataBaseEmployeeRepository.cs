@@ -17,17 +17,20 @@ namespace SEDC_WebApplication.Models.Repositories.Implementations
         }
         public IEnumerable<EmployeeDTO> GetAllEmployees()
         {
-            return _employeeManager.GetAllEmployees();
+            throw new NotImplementedException();
+            //return _employeeManager.GetAllEmployees();
         }
 
         public EmployeeDTO GetEmployeeById(int id)
         {
-            return _employeeManager.GetEmployeeById(id);
+            throw new NotImplementedException();
+            //return _employeeManager.GetEmployeeById(id);
         }
 
         public EmployeeDTO Add(EmployeeDTO employee)
         {
-            return _employeeManager.Add(employee);
+            throw new NotImplementedException();
+            //return _employeeManager.Add(employee);
         }
     }
 }

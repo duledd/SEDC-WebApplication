@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using SEDC_WebAPI.Helpers;
 using SEDC_WebAPI.Repositories.Interfaces;
+using SEDC_WebAPI.Services.Interfaces;
+using SEDC_WebApplication.BLL.Logic.Models;
 using SEDC_WebApplication.Models;
 using System;
 using System.Collections.Generic;
@@ -12,19 +16,20 @@ using System.Threading.Tasks;
 
 namespace SEDC_WebAPI.Controllers
 {
+    [Authorize(Roles = AuthorizationRoles.Client)]
     [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly ICustomerRepository _customerRepository;
+        private readonly IDataService _dataService;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
         //private List<Customer> customers;
 
-        public CustomerController(ICustomerRepository customerRepository, IWebHostEnvironment hostingEnvironment)
+        public CustomerController(IDataService dataService, IWebHostEnvironment hostingEnvironment)
         {
-            _customerRepository = customerRepository;
+            _dataService = dataService;
             _hostingEnvironment = hostingEnvironment;
             //MockCustomerRepository mockCustomerRepository = new MockCustomerRepository();
             //customers = mockCustomerRepository.GetAllCustomers().ToList();
@@ -34,27 +39,32 @@ namespace SEDC_WebAPI.Controllers
         [HttpGet]
         public IEnumerable<CustomerDTO> Get()
         {
-            return _customerRepository.GetAllCustomers().ToList();
+            UserDTO user = (UserDTO)HttpContext.Items["User"];
+            return _dataService.GetAllCustomers().ToList();
         }
 
         // GET api/<CustomerController>/5
+        //[Authorize(Roles = AuthorizationRoles.Client)]
         [HttpGet("{id}")]
         public CustomerDTO Get(int id)
         {
-            return _customerRepository.GetCustomerById(id);
+            UserDTO user = (UserDTO)HttpContext.Items["User"];
+            return _dataService.GetCustomerById(id);
         }
 
         // POST api/<CustomerController>
         [HttpPost]
         public void Post([FromBody] CustomerDTO customer)
         {
-            _customerRepository.Add(customer);
+            _dataService.Add(customer);
         }
 
         // PUT api/<CustomerController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] CustomerDTO customer)
         {
+            UserDTO user = (UserDTO)HttpContext.Items["User"];
+            _dataService.UpdateCustomer(id, customer);
         }
 
         // DELETE api/<CustomerController>/5

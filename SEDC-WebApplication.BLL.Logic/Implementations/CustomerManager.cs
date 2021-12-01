@@ -58,5 +58,13 @@ namespace SEDC_WebApplication.BLL.Logic.Implementations
                 throw ex;
             }
         }
+
+        public CustomerDTO Update(int id, CustomerDTO customer)
+        {
+            Customer customerEntity = _mapper.Map<Customer>(customer);
+            _customerDAL.Update(customerEntity);
+            customer = _mapper.Map<CustomerDTO>(customerEntity);
+            return customer;
+        }
     }
 }

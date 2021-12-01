@@ -15,12 +15,14 @@ namespace SEDC_WebApplicationDataBaseFactory.Entities
         public decimal TotalAmount { get; set; }
         public int Status { get; set; }
         //public int EmployeeId { get; set; }
-        //public int CustomerId { get; set; }
+        [ForeignKey("CustomerId")]
+        public int CustomerId { get; set; }
 
-        //[ForeignKey("EmployeeId")]
+        ////[ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
 
         //[ForeignKey("CustomerId")]
         public Customer Customer { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
     }
 }

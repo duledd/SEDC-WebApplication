@@ -10,5 +10,6 @@ namespace SEDC_WebApplicationDataBaseFactory.Interfaces
     public interface IUserDAL
     {
         User GetUserByUserNameAndPassword(string username, string password);
+        User GetUserById(int id);
     }
 }

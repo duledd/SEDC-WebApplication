@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using SEDC_WebApplication.BLL.Logic.Helpers;
 using SEDC_WebApplication.BLL.Logic.Models;
+using SEDC_WebApplication.BLL.Logic.Models.Enum;
 //using SEDC_WebApplication.DAL.Data.Entities;
 using SEDC_WebApplication.Models;
 using SEDC_WebApplicationDataBaseFactory.Entities;
@@ -86,7 +88,7 @@ namespace SEDC_WebApplication.BLL.Logic
 
             //
             CreateMap<Employee, EmployeeDTO>();
-            
+                
 
             CreateMap<EmployeeDTO, Employee>()
                 .ForMember(dest => dest.UserName, src => src.MapFrom(src => src.Email))
@@ -98,6 +100,7 @@ namespace SEDC_WebApplication.BLL.Logic
                 .ForMember(dest => dest.Role, src => src.MapFrom(src => src.RoleId))
                 .ForMember(dest => dest.DateOfBirth, src => src.MapFrom(src => src.DateOfBirth))
                 .ForMember(dest => dest.Name, src => src.MapFrom(src => src.UserName))
+                .ForMember(dest => dest.Name, src => src.MapFrom(src => src.Password))
                 .ForMember(dest => dest.Pol, src => src.MapFrom(src => src.Gender))
                 .ForMember(dest => dest.Picture, src => src.MapFrom(src => src.PicturePath));
 
@@ -108,6 +111,7 @@ namespace SEDC_WebApplication.BLL.Logic
                 .ForMember(dest => dest.Role, src => src.Ignore())
                 .ForMember(dest => dest.DateOfBirth, src => src.MapFrom(src => src.DateOfBirth))
                 .ForMember(dest => dest.UserName, src => src.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Password, src => src.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Gender, src => src.MapFrom(src => src.Pol))
                 .ForMember(dest => dest.PicturePath, src => src.MapFrom(src => src.Picture));
 
@@ -121,6 +125,7 @@ namespace SEDC_WebApplication.BLL.Logic
             CreateMap<CustomerDTO, Customer>()
                 .ForMember(dest => dest.UserName, src => src.MapFrom(src => src.Email))
                 .ForMember(dest => dest.CustomerName, src => src.MapFrom(src => src.Name))
+                //.ForMember(dest => dest.RoleId, src => src.Ignore())
                 //.ForMember(dest => dest.Address, src => src.MapFrom(src => src.Address))
                 .ForMember(dest => dest.ContactId, src => src.MapFrom(src => src.CustomerContactId))
                 .ForMember(dest => dest.PicturePath, src => src.MapFrom(src => src.PicturePath));
@@ -129,13 +134,18 @@ namespace SEDC_WebApplication.BLL.Logic
                 .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, src => src.MapFrom(src => src.CustomerName))
                 .ForMember(dest => dest.CustomerContactId, src => src.MapFrom(src => src.ContactId))
-                .ForMember(dest => dest.Name, src => src.MapFrom(src => src.UserName));
+                .ForMember(dest => dest.Name, src => src.MapFrom(src => src.UserName))
+                .ForMember(dest => dest.Name, src => src.MapFrom(src => src.Password));
+                
 
             CreateMap<CustomerDTO, SEDC_WebApplicationDataBaseFactory.Entities.Customer>()
                 .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
                 .ForMember(dest => dest.CustomerName, src => src.MapFrom(src => src.Name))
-                .ForMember(dest => dest.ContactId, src => src.Ignore())
-                .ForMember(dest => dest.UserName, src => src.MapFrom(src => src.Name));
+                .ForMember(dest => dest.ContactId, src => src.MapFrom(src => src.CustomerContactId))
+                //.ForMember(dest => dest.ContactId, src => src.Ignore())
+                .ForMember(dest => dest.RoleId, src => src.Ignore())
+                .ForMember(dest => dest.UserName, src => src.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Password, src => src.MapFrom(src => src.Name));
 
 
 
@@ -172,21 +182,39 @@ namespace SEDC_WebApplication.BLL.Logic
 
 
             //ORDER
-            CreateMap<SEDC_WebApplicationDataBaseFactory.Entities.Order, OrderDTO>()
-                .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Number, src => src.MapFrom(src => src.Number))
-                .ForMember(dest => dest.Date, src => src.MapFrom(src => src.Date))
-                .ForMember(dest => dest.TotalAmount, src => src.MapFrom(src => src.TotalAmount));
+            //CreateMap<Order, OrderDTO>()
+            //    .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
+            //    .ForMember(dest => dest.Number, src => src.MapFrom(src => src.Number))
+            //    .ForMember(dest => dest.Date, src => src.MapFrom(src => src.Date))
+            //    .ForMember(dest => dest.TotalAmount, src => src.MapFrom(src => src.TotalAmount));
 
-            CreateMap<OrderDTO, SEDC_WebApplicationDataBaseFactory.Entities.Order>()
-                .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Number, src => src.MapFrom(src => src.Number))
-                .ForMember(dest => dest.Date, src => src.MapFrom(src => src.Date))
-                .ForMember(dest => dest.TotalAmount, src => src.MapFrom(src => src.TotalAmount));
+            //CreateMap<OrderDTO, Order>()
+            //    .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
+            //    .ForMember(dest => dest.Number, src => src.MapFrom(src => src.Number))
+            //    .ForMember(dest => dest.Date, src => src.MapFrom(src => src.Date))
+            //    .ForMember(dest => dest.TotalAmount, src => src.MapFrom(src => src.TotalAmount));
+
+            //CreateMap<SEDC_WebApplicationDataBaseFactory.Entities.Order, OrderDTO>()
+            //    .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
+            //    .ForMember(dest => dest.Number, src => src.MapFrom(src => src.Number))
+            //    .ForMember(dest => dest.Date, src => src.MapFrom(src => src.Date))
+            //    .ForMember(dest => dest.TotalAmount, src => src.MapFrom(src => src.TotalAmount));
+
+            //CreateMap<OrderDTO, SEDC_WebApplicationDataBaseFactory.Entities.Order>()
+            //    .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
+            //    .ForMember(dest => dest.Number, src => src.MapFrom(src => src.Number))
+            //    .ForMember(dest => dest.Date, src => src.MapFrom(src => src.Date))
+            //    .ForMember(dest => dest.TotalAmount, src => src.MapFrom(src => src.TotalAmount));
 
 
             // USER
-            CreateMap<User, UserDTO>();
+            CreateMap<User, UserDTO>()
+                .ForMember(dest => dest.Role, src => src.MapFrom(src => EnumHelper.GetString<RoleEnum>(src.RoleId)));
+
+            CreateMap<UserDTO, User>();
+
+            CreateMap<SEDC_WebApplicationDataBaseFactory.Entities.User, UserDTO>()
+                .ForMember(dest => dest.Role, src => src.MapFrom(src => EnumHelper.GetString<RoleEnum>(src.RoleId)));
         }
     }
 }

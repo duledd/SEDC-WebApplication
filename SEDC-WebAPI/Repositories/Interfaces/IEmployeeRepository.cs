@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace SEDC_WebAPI.Repositories.Interfaces
 {
-    public interface IEmployeeRepository
+    interface IEmployeeRepository
     {
         IEnumerable<EmployeeDTO> GetAllEmployees();
         EmployeeDTO GetEmployeeById(int id);
         EmployeeDTO Add(EmployeeDTO employee);
+        EmployeeDTO UpdateEmployee(int id, EmployeeDTO employee);
     }
 }
